@@ -1,411 +1,308 @@
 /**
- * CleanPro - Скрипты для лендинга клининговой компании
- * Включает: навигацию, анимации, слайдер, форму, модальное окно
+ * CleanPro - JavaScript для лендинга клининговой компании
  */
 
-document.addEventListener('DOMContentLoaded', function() {
-    // ============================================
-    // Мобильное меню (бургер)
-    // ============================================
+document.addEventListener('DOMContentLoaded', () => {
     
+    // --- Мобильное меню (бургер) ---
     const burgerBtn = document.getElementById('burgerBtn');
-    const navMenu = document.getElementById('navMenu');
+    const nav = document.getElementById('nav');
+    const navLinks = document.querySelectorAll('.nav-link');
     
-    if (burgerBtn && navMenu) {
-        burgerBtn.addEventListener('click', function() {
+    if (burgerBtn) {
+        burgerBtn.addEventListener('click', () => {
+            nav.classList.toggle('active');
             burgerBtn.classList.toggle('active');
-            navMenu.classList.toggle('active');
         });
         
         // Закрытие меню при клике на ссылку
-        const navLinks = navMenu.querySelectorAll('.nav-link');
         navLinks.forEach(link => {
-            link.addEventListener('click', function() {
+            link.addEventListener('click', () => {
+                nav.classList.remove('active');
                 burgerBtn.classList.remove('active');
-                navMenu.classList.remove('active');
             });
         });
     }
     
-    // ============================================
-    // Плавная прокрутка к секциям
-    // ============================================
-    
-    window.scrollToSection = function(sectionId) {
-        const section = document.getElementById(sectionId);
-        if (section) {
-            const headerHeight = document.querySelector('.header').offsetHeight;
-            const sectionPosition = section.offsetTop - headerHeight;
+    // --- Плавная прокрутка к якорям ---
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
             
-            window.scrollTo({
-                top: sectionPosition,
-                behavior: 'smooth'
-            });
-        }
-    };
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                const headerHeight = document.querySelector('.header').offsetHeight;
+                const targetPosition = targetElement.offsetTop - headerHeight;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
     
-    // ============================================
-    // Изменение шапки при скролле
-    // ============================================
+    // --- Подсветка активной секции в меню ---
+    const sections = document.querySelectorAll('section[id]');
     
-    const header = document.querySelector('.header');
+    function highlightNavLink() {
+        const scrollY = window.pageYOffset;
+        const headerHeight = document.querySelector('.header').offsetHeight;
+        
+        sections.forEach(section => {
+            const sectionHeight = section.offsetHeight;
+            const sectionTop = section.offsetTop - headerHeight - 100;
+            const sectionId = section.getAttribute('id');
+            const navLink = document.querySelector(`.nav-link[href="#${sectionId}"]`);
+            
+            if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+                navLinks.forEach(link => link.classList.remove('active'));
+                if (navLink) navLink.classList.add('active');
+            }
+        });
+    }
     
-    window.addEventListener('scroll', function() {
+    window.addEventListener('scroll', highlightNavLink);
+    
+    // --- Изменение шапки при скролле ---
+    const header = document.getElementById('header');
+    
+    function handleHeaderScroll() {
         if (window.scrollY > 50) {
             header.classList.add('scrolled');
         } else {
             header.classList.remove('scrolled');
         }
-    });
-    
-    // ============================================
-    // Анимация элементов при скролле
-    // ============================================
-    
-    const animateElements = document.querySelectorAll('.animate-on-scroll');
-    
-    const checkAnimation = function() {
-        const triggerBottom = window.innerHeight * 0.8;
-        
-        animateElements.forEach(element => {
-            const elementTop = element.getBoundingClientRect().top;
-            
-            if (elementTop < triggerBottom) {
-                element.classList.add('visible');
-            }
-        });
-    };
-    
-    // Проверка при загрузке и при скролле
-    checkAnimation();
-    window.addEventListener('scroll', checkAnimation);
-    
-    // ============================================
-    // Активная ссылка в навигации
-    // ============================================
-    
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.nav-link');
-    
-    window.addEventListener('scroll', function() {
-        let current = '';
-        const headerHeight = document.querySelector('.header').offsetHeight;
-        
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop - headerHeight - 100;
-            const sectionHeight = section.offsetHeight;
-            
-            if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
-                current = section.getAttribute('id');
-            }
-        });
-        
-        navLinks.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href') === '#' + current) {
-                link.classList.add('active');
-            }
-        });
-    });
-    
-    // ============================================
-    // Слайдер отзывов
-    // ============================================
-    
-    const reviewsTrack = document.getElementById('reviewsTrack');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-    const reviewsDots = document.getElementById('reviewsDots');
-    
-    if (reviewsTrack && prevBtn && nextBtn) {
-        let currentSlide = 0;
-        const reviewCards = reviewsTrack.querySelectorAll('.review-card');
-        const totalSlides = reviewCards.length;
-        
-        // Создание точек навигации
-        if (reviewsDots) {
-            for (let i = 0; i < totalSlides; i++) {
-                const dot = document.createElement('span');
-                dot.classList.add('reviews-dot');
-                if (i === 0) dot.classList.add('active');
-                dot.addEventListener('click', () => goToSlide(i));
-                reviewsDots.appendChild(dot);
-            }
-        }
-        
-        const dots = reviewsDots ? reviewsDots.querySelectorAll('.reviews-dot') : [];
-        
-        function updateSlider() {
-            const cardWidth = reviewCards[0].offsetWidth + 32; // 32px gap
-            reviewsTrack.style.transform = `translateX(-${currentSlide * cardWidth}px)`;
-            
-            // Обновление точек
-            dots.forEach((dot, index) => {
-                dot.classList.toggle('active', index === currentSlide);
-            });
-        }
-        
-        function goToSlide(index) {
-            currentSlide = index;
-            updateSlider();
-        }
-        
-        prevBtn.addEventListener('click', function() {
-            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-            updateSlider();
-        });
-        
-        nextBtn.addEventListener('click', function() {
-            currentSlide = (currentSlide + 1) % totalSlides;
-            updateSlider();
-        });
-        
-        // Автопереключение каждые 5 секунд
-        let autoSlide = setInterval(() => {
-            currentSlide = (currentSlide + 1) % totalSlides;
-            updateSlider();
-        }, 5000);
-        
-        // Остановка автопереключения при наведении
-        reviewsTrack.addEventListener('mouseenter', () => clearInterval(autoSlide));
-        reviewsTrack.addEventListener('mouseleave', () => {
-            autoSlide = setInterval(() => {
-                currentSlide = (currentSlide + 1) % totalSlides;
-                updateSlider();
-            }, 5000);
-        });
-        
-        // Пересчет при изменении размера окна
-        window.addEventListener('resize', updateSlider);
     }
     
-    // ============================================
-    // Форма обратной связи
-    // ============================================
+    window.addEventListener('scroll', handleHeaderScroll);
     
-    const contactForm = document.getElementById('contactForm');
-    
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            let isValid = true;
-            
-            // Валидация имени
-            const nameInput = document.getElementById('name');
-            const nameError = document.getElementById('nameError');
-            if (nameInput && nameInput.value.trim().length < 2) {
-                nameInput.classList.add('error');
-                if (nameError) nameError.textContent = 'Введите корректное имя (минимум 2 символа)';
-                isValid = false;
-            } else if (nameInput) {
-                nameInput.classList.remove('error');
-                if (nameError) nameError.textContent = '';
-            }
-            
-            // Валидация телефона
-            const phoneInput = document.getElementById('phone');
-            const phoneError = document.getElementById('phoneError');
-            const phoneValue = phoneInput ? phoneInput.value.replace(/\D/g, '') : '';
-            if (phoneValue.length < 11) {
-                phoneInput.classList.add('error');
-                if (phoneError) phoneError.textContent = 'Введите корректный номер телефона';
-                isValid = false;
-            } else if (phoneInput) {
-                phoneInput.classList.remove('error');
-                if (phoneError) phoneError.textContent = '';
-            }
-            
-            // Валидация согласия
-            const agreementInput = document.getElementById('agreement');
-            if (agreementInput && !agreementInput.checked) {
-                alert('Необходимо согласие на обработку персональных данных');
-                isValid = false;
-            }
-            
-            if (isValid) {
-                // Имитация отправки формы
-                const submitBtn = contactForm.querySelector('button[type="submit"]');
-                const originalText = submitBtn.textContent;
-                submitBtn.textContent = 'Отправка...';
-                submitBtn.disabled = true;
-                
-                setTimeout(() => {
-                    alert('Спасибо! Ваша заявка успешно отправлена. Мы свяжемся с вами в ближайшее время.');
-                    contactForm.reset();
-                    submitBtn.textContent = originalText;
-                    submitBtn.disabled = false;
-                }, 1500);
-            }
-        });
-        
-        // Удаление ошибки при вводе
-        const formInputs = contactForm.querySelectorAll('.form-input');
-        formInputs.forEach(input => {
-            input.addEventListener('input', function() {
-                this.classList.remove('error');
-                const errorElement = this.parentElement.querySelector('.form-error');
-                if (errorElement) errorElement.textContent = '';
-            });
-        });
-    }
-    
-    // ============================================
-    // Маска для телефона
-    // ============================================
-    
-    const phoneInputs = document.querySelectorAll('input[type="tel"]');
-    
-    phoneInputs.forEach(input => {
-        input.addEventListener('focus', function() {
-            if (!this.value) {
-                this.value = '+7 (';
-            }
-        });
-        
-        input.addEventListener('input', function() {
-            let value = this.value.replace(/\D/g, '');
-            
-            if (value.startsWith('7')) {
-                value = value.substring(1);
-            }
-            
-            if (value.length > 10) value = value.substring(0, 10);
-            
-            let formattedValue = '+7 (';
-            if (value.length > 0) formattedValue += value.substring(0, 3);
-            if (value.length > 3) formattedValue += ') ' + value.substring(3, 6);
-            if (value.length > 6) formattedValue += '-' + value.substring(6, 8);
-            if (value.length > 8) formattedValue += '-' + value.substring(8, 10);
-            
-            this.value = formattedValue;
-        });
-    });
-    
-    // ============================================
-    // Модальное окно обратного звонка
-    // ============================================
-    
-    const callbackBtn = document.getElementById('callbackBtn');
-    const callbackModal = document.getElementById('callbackModal');
+    // --- Модальное окно ---
     const modalOverlay = document.getElementById('modalOverlay');
     const modalClose = document.getElementById('modalClose');
-    const callbackForm = document.getElementById('callbackForm');
+    const openModalBtns = document.querySelectorAll('.open-modal');
     
-    if (callbackBtn && callbackModal) {
-        callbackBtn.addEventListener('click', function() {
-            callbackModal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        });
-    }
-    
-    if (modalOverlay && modalClose) {
-        [modalOverlay, modalClose].forEach(element => {
-            element.addEventListener('click', closeModal);
-        });
+    function openModal() {
+        modalOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
     }
     
     function closeModal() {
-        if (callbackModal) {
-            callbackModal.classList.remove('active');
-            document.body.style.overflow = '';
-        }
+        modalOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+    
+    openModalBtns.forEach(btn => {
+        btn.addEventListener('click', openModal);
+    });
+    
+    if (modalClose) {
+        modalClose.addEventListener('click', closeModal);
+    }
+    
+    if (modalOverlay) {
+        modalOverlay.addEventListener('click', (e) => {
+            if (e.target === modalOverlay) {
+                closeModal();
+            }
+        });
     }
     
     // Закрытие по ESC
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
             closeModal();
         }
     });
     
-    // Обработка формы модального окна
-    if (callbackForm) {
-        callbackForm.addEventListener('submit', function(e) {
+    // --- Маска для телефона ---
+    const phoneInputs = document.querySelectorAll('.phone-mask');
+    
+    phoneInputs.forEach(input => {
+        input.addEventListener('input', (e) => {
+            let value = e.target.value.replace(/\D/g, '');
+            
+            if (value.length > 11) value = value.slice(0, 11);
+            
+            if (value.length === 0) {
+                e.target.value = '';
+                return;
+            }
+            
+            if (value[0] === '8' || value[0] === '7') {
+                value = value.slice(1);
+            }
+            
+            let formattedValue = '+7';
+            if (value.length > 0) formattedValue += ' (' + value.slice(0, 3);
+            if (value.length > 3) formattedValue += ') ' + value.slice(3, 6);
+            if (value.length > 6) formattedValue += '-' + value.slice(6, 8);
+            if (value.length > 8) formattedValue += '-' + value.slice(8, 10);
+            
+            e.target.value = formattedValue;
+        });
+        
+        input.addEventListener('focus', () => {
+            if (!input.value) {
+                input.value = '+7 (';
+            }
+        });
+        
+        input.addEventListener('blur', () => {
+            if (input.value === '+7 ()' || input.value === '+7 (' || input.value === '') {
+                input.value = '';
+            }
+        });
+    });
+    
+    // --- Валидация форм ---
+    const forms = [
+        document.getElementById('calcForm'),
+        document.getElementById('ctaForm'),
+        document.getElementById('modalForm')
+    ];
+    
+    forms.forEach(form => {
+        if (!form) return;
+        
+        form.addEventListener('submit', (e) => {
             e.preventDefault();
             
-            const nameInput = document.getElementById('callbackName');
-            const phoneInput = document.getElementById('callbackPhone');
+            const inputs = form.querySelectorAll('input[required]');
+            let isValid = true;
             
-            if (nameInput && phoneInput && nameInput.value.trim() && phoneInput.value.trim()) {
-                const submitBtn = callbackForm.querySelector('button[type="submit"]');
+            inputs.forEach(input => {
+                if (!input.value.trim()) {
+                    isValid = false;
+                    input.style.borderColor = '#e74c3c';
+                    
+                    setTimeout(() => {
+                        input.style.borderColor = '';
+                    }, 2000);
+                }
+            });
+            
+            // Проверка телефона
+            const phoneInput = form.querySelector('.phone-mask');
+            if (phoneInput) {
+                const phoneValue = phoneInput.value.replace(/\D/g, '');
+                if (phoneValue.length < 11) {
+                    isValid = false;
+                    phoneInput.style.borderColor = '#e74c3c';
+                    
+                    setTimeout(() => {
+                        phoneInput.style.borderColor = '';
+                    }, 2000);
+                }
+            }
+            
+            if (isValid) {
+                // Имитация отправки формы
+                const submitBtn = form.querySelector('button[type="submit"]');
                 const originalText = submitBtn.textContent;
-                submitBtn.textContent = 'Отправка...';
+                submitBtn.textContent = 'Отправлено!';
                 submitBtn.disabled = true;
                 
                 setTimeout(() => {
-                    alert('Спасибо! Мы перезвоним вам в ближайшее время.');
-                    callbackForm.reset();
                     submitBtn.textContent = originalText;
                     submitBtn.disabled = false;
+                    form.reset();
                     closeModal();
+                    alert('Спасибо! Ваша заявка принята. Менеджер свяжется с вами в ближайшее время.');
                 }, 1500);
             }
         });
-    }
+    });
     
-    // ============================================
-    // Параллакс эффект для hero секции
-    // ============================================
+    // --- Слайдер отзывов ---
+    const slider = document.getElementById('reviewsSlider');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
     
-    const hero = document.querySelector('.hero');
-    
-    if (hero) {
-        window.addEventListener('scroll', function() {
-            const scrolled = window.scrollY;
-            const heroHeight = hero.offsetHeight;
-            
-            if (scrolled < heroHeight) {
-                hero.style.backgroundPositionY = scrolled * 0.5 + 'px';
+    if (slider && prevBtn && nextBtn) {
+        let isDragging = false;
+        let startX;
+        let scrollLeft;
+        
+        // Автопрокрутка
+        let autoScrollInterval = setInterval(() => {
+            const maxScroll = slider.scrollWidth - slider.clientWidth;
+            if (slider.scrollLeft >= maxScroll) {
+                slider.scrollTo({ left: 0, behavior: 'smooth' });
+            } else {
+                slider.scrollBy({ left: 420, behavior: 'smooth' });
             }
+        }, 5000);
+        
+        // Остановка автопрокрутки при взаимодействии
+        slider.addEventListener('mouseenter', () => clearInterval(autoScrollInterval));
+        slider.addEventListener('mouseleave', () => {
+            autoScrollInterval = setInterval(() => {
+                const maxScroll = slider.scrollWidth - slider.clientWidth;
+                if (slider.scrollLeft >= maxScroll) {
+                    slider.scrollTo({ left: 0, behavior: 'smooth' });
+                } else {
+                    slider.scrollBy({ left: 420, behavior: 'smooth' });
+                }
+            }, 5000);
+        });
+        
+        prevBtn.addEventListener('click', () => {
+            slider.scrollBy({ left: -420, behavior: 'smooth' });
+        });
+        
+        nextBtn.addEventListener('click', () => {
+            slider.scrollBy({ left: 420, behavior: 'smooth' });
+        });
+        
+        // Drag для мыши
+        slider.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            startX = e.pageX - slider.offsetLeft;
+            scrollLeft = slider.scrollLeft;
+            slider.style.cursor = 'grabbing';
+        });
+        
+        slider.addEventListener('mouseleave', () => {
+            isDragging = false;
+            slider.style.cursor = 'grab';
+        });
+        
+        slider.addEventListener('mouseup', () => {
+            isDragging = false;
+            slider.style.cursor = 'grab';
+        });
+        
+        slider.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            e.preventDefault();
+            const x = e.pageX - slider.offsetLeft;
+            const walk = (x - startX) * 2;
+            slider.scrollLeft = scrollLeft - walk;
         });
     }
     
-    // ============================================
-    // Счетчик чисел в статистике
-    // ============================================
+    // --- Анимация появления элементов при скролле ---
+    const fadeElements = document.querySelectorAll('.fade-in');
     
-    const statNumbers = document.querySelectorAll('.stat-number');
-    
-    const animateCounter = function(element) {
-        const text = element.textContent;
-        const hasPlus = text.includes('+');
-        const hasPercent = text.includes('%');
-        const number = parseInt(text.replace(/\D/g, ''));
-        
-        if (isNaN(number)) return;
-        
-        let current = 0;
-        const increment = number / 50;
-        const duration = 2000;
-        const stepTime = duration / 50;
-        
-        const timer = setInterval(() => {
-            current += increment;
-            if (current >= number) {
-                current = number;
-                clearInterval(timer);
-            }
-            
-            let displayValue = Math.floor(current).toLocaleString('ru-RU');
-            if (hasPlus) displayValue += '+';
-            if (hasPercent) displayValue += '%';
-            
-            element.textContent = displayValue;
-        }, stepTime);
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
     };
     
-    // Запуск счетчика когда статистика видна
-    const statsObserver = new IntersectionObserver((entries) => {
+    const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                animateCounter(entry.target);
-                statsObserver.unobserve(entry.target);
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
             }
         });
-    }, { threshold: 0.5 });
+    }, observerOptions);
     
-    statNumbers.forEach(stat => statsObserver.observe(stat));
+    fadeElements.forEach(el => observer.observe(el));
     
-    console.log('CleanPro скрипты загружены успешно!');
+    // --- Активная навигация при загрузке ---
+    highlightNavLink();
 });
