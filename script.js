@@ -34,31 +34,19 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // ===== МОБИЛЬНОЕ МЕНЮ (БУРГЕР) =====
     const burger = document.getElementById('burger');
-    const mobileMenu = document.createElement('div');
-    mobileMenu.className = 'mobile-menu';
+    const mobileMenu = document.getElementById('mobileMenu');
     
-    // Копируем ссылки из навигации в мобильное меню
-    const navLinks = document.querySelectorAll('.header__nav-link');
-    navLinks.forEach(link => {
-        const mobileLink = document.createElement('a');
-        mobileLink.href = link.href;
-        mobileLink.textContent = link.textContent;
-        mobileLink.setAttribute('data-scroll', link.getAttribute('data-scroll') || link.getAttribute('href'));
-        mobileMenu.appendChild(mobileLink);
-    });
-    
-    // Добавляем кнопку в мобильное меню
-    const mobileBtn = document.createElement('a');
-    mobileBtn.href = '#cta';
-    mobileBtn.textContent = 'Заказать звонок';
-    mobileBtn.setAttribute('data-scroll', '#cta');
-    mobileMenu.appendChild(mobileBtn);
-    
-    document.body.appendChild(mobileMenu);
+    // Добавляем класс для мобильного меню
+    if (mobileMenu) {
+        mobileMenu.classList.add('mobile-menu');
+    }
     
     burger.addEventListener('click', function() {
         this.classList.toggle('active');
         mobileMenu.classList.toggle('active');
+        
+        // Блокируем скролл страницы при открытом меню
+        document.body.classList.toggle('menu-open');
         
         // Анимация линий бургера
         const lines = this.querySelectorAll('.header__burger-line');
@@ -71,6 +59,22 @@ document.addEventListener('DOMContentLoaded', function() {
             lines[1].style.opacity = '1';
             lines[2].style.transform = 'none';
         }
+    });
+    
+    // Закрываем меню при клике на ссылку
+    const mobileLinks = mobileMenu.querySelectorAll('.header__nav-link');
+    mobileLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            mobileMenu.classList.remove('active');
+            burger.classList.remove('active');
+            document.body.classList.remove('menu-open');
+            
+            // Сброс анимации бургера
+            const lines = burger.querySelectorAll('.header__burger-line');
+            lines[0].style.transform = 'none';
+            lines[1].style.opacity = '1';
+            lines[2].style.transform = 'none';
+        });
     });
     
     // ===== ИЗМЕНЕНИЕ ШАПКИ ПРИ СКРОЛЛЕ =====
