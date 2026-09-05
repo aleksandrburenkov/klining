@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CleanPro - Профессиональная клининговая компания</title>
     <!-- Подключение шрифтов Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     <!-- Иконки Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Стили -->
@@ -16,27 +16,29 @@
     <header class="header">
         <div class="container header-container">
             <a href="#" class="logo">
-                <i class="fas fa-sparkles"></i>
-                <span>CleanPro</span>
+                <i class="fas fa-sparkles logo-icon"></i>
+                <span class="logo-text">CleanPro</span>
             </a>
             
             <nav class="nav-menu" id="navMenu">
                 <ul class="nav-list">
                     <li><a href="#hero" class="nav-link active">Главная</a></li>
                     <li><a href="#services" class="nav-link">Услуги</a></li>
-                    <li><a href="#about" class="nav-link">О нас</a></li>
-                    <li><a href="#pricing" class="nav-link">Цены</a></li>
+                    <li><a href="#about" class="nav-link">О компании</a></li>
+                    <li><a href="#pricing" class="nav-link">Тарифы</a></li>
                     <li><a href="#reviews" class="nav-link">Отзывы</a></li>
                     <li><a href="#contact" class="nav-link">Контакты</a></li>
                 </ul>
             </nav>
             
             <div class="header-actions">
-                <a href="tel:+79991234567" class="phone-number">
-                    <i class="fas fa-phone-alt"></i>
+                <a href="tel:+79991234567" class="phone-link">
+                    <i class="fas fa-phone"></i>
                     <span>+7 (999) 123-45-67</span>
                 </a>
-                <button class="btn btn-primary" onclick="scrollToSection('contact')">Заказать звонок</button>
+                <button class="btn btn-primary header-btn" onclick="scrollToSection('contact')">
+                    Заказать звонок
+                </button>
                 <button class="burger-menu" id="burgerBtn" aria-label="Меню">
                     <span></span>
                     <span></span>
@@ -48,28 +50,36 @@
 
     <!-- Главный экран (Hero Section) -->
     <section class="hero" id="hero">
-        <div class="hero-overlay"></div>
         <div class="container hero-container">
             <div class="hero-content">
-                <h1 class="hero-title animate-on-scroll">Профессиональная уборка вашего дома и офиса</h1>
-                <p class="hero-subtitle animate-on-scroll">Чистота и комфорт в каждом уголке. Доверьте уборку профессионалам!</p>
-                <div class="hero-buttons animate-on-scroll">
-                    <button class="btn btn-primary btn-large" onclick="scrollToSection('contact')">
-                        <i class="fas fa-calendar-check"></i> Заказать уборку
+                <h1 class="hero-title">
+                    Профессиональная уборка<br>
+                    <span class="highlight">вашего дома и офиса</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Чистота и комфорт в каждом уголке. Доверьте уборку профессионалам!
+                </p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary btn-lg" onclick="scrollToSection('contact')">
+                        <i class="fas fa-calendar-check"></i>
+                        Заказать уборку
                     </button>
-                    <button class="btn btn-outline btn-large" onclick="scrollToSection('services')">
-                        <i class="fas fa-play-circle"></i> Узнать больше
+                    <button class="btn btn-outline btn-lg" onclick="scrollToSection('services')">
+                        <i class="fas fa-play-circle"></i>
+                        Узнать больше
                     </button>
                 </div>
-                <div class="hero-stats animate-on-scroll">
+                <div class="hero-stats">
                     <div class="stat-item">
                         <span class="stat-number">5000+</span>
                         <span class="stat-label">Довольных клиентов</span>
                     </div>
+                    <div class="stat-divider"></div>
                     <div class="stat-item">
                         <span class="stat-number">10+</span>
                         <span class="stat-label">Лет опыта</span>
                     </div>
+                    <div class="stat-divider"></div>
                     <div class="stat-item">
                         <span class="stat-number">100%</span>
                         <span class="stat-label">Гарантия качества</span>
@@ -83,33 +93,33 @@
     <section class="features" id="features">
         <div class="container">
             <div class="features-grid">
-                <div class="feature-card animate-on-scroll">
-                    <div class="feature-icon">
-                        <i class="fas fa-clock"></i>
+                <div class="feature-card">
+                    <div class="feature-icon-wrapper">
+                        <i class="fas fa-clock feature-icon"></i>
                     </div>
-                    <h3>Быстро</h3>
-                    <p>Выполняем работу в срок без потери качества</p>
+                    <h3 class="feature-title">Быстро</h3>
+                    <p class="feature-text">Выполняем работу в срок без потери качества</p>
                 </div>
-                <div class="feature-card animate-on-scroll">
-                    <div class="feature-icon">
-                        <i class="fas fa-shield-alt"></i>
+                <div class="feature-card">
+                    <div class="feature-icon-wrapper">
+                        <i class="fas fa-shield-alt feature-icon"></i>
                     </div>
-                    <h3>Надежно</h3>
-                    <p>Все сотрудники проверены и застрахованы</p>
+                    <h3 class="feature-title">Надежно</h3>
+                    <p class="feature-text">Все сотрудники проверены и застрахованы</p>
                 </div>
-                <div class="feature-card animate-on-scroll">
-                    <div class="feature-icon">
-                        <i class="fas fa-leaf"></i>
+                <div class="feature-card">
+                    <div class="feature-icon-wrapper">
+                        <i class="fas fa-leaf feature-icon"></i>
                     </div>
-                    <h3>Экологично</h3>
-                    <p>Используем безопасные моющие средства</p>
+                    <h3 class="feature-title">Экологично</h3>
+                    <p class="feature-text">Используем безопасные моющие средства</p>
                 </div>
-                <div class="feature-card animate-on-scroll">
-                    <div class="feature-icon">
-                        <i class="fas fa-wallet"></i>
+                <div class="feature-card">
+                    <div class="feature-icon-wrapper">
+                        <i class="fas fa-wallet feature-icon"></i>
                     </div>
-                    <h3>Доступно</h3>
-                    <p>Конкурентные цены и система скидок</p>
+                    <h3 class="feature-title">Доступно</h3>
+                    <p class="feature-text">Конкурентные цены и система скидок</p>
                 </div>
             </div>
         </div>
@@ -118,115 +128,135 @@
     <!-- Услуги -->
     <section class="services" id="services">
         <div class="container">
-            <div class="section-header animate-on-scroll">
+            <div class="section-header">
                 <h2 class="section-title">Наши услуги</h2>
                 <p class="section-subtitle">Полный спектр клининговых услуг для вашего комфорта</p>
             </div>
             
             <div class="services-grid">
-                <div class="service-card animate-on-scroll">
-                    <div class="service-image">
-                        <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=400&h=300&fit=crop" alt="Уборка квартир">
+                <div class="service-card">
+                    <div class="service-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=500&h=350&fit=crop" alt="Уборка квартир" class="service-image">
                     </div>
                     <div class="service-content">
-                        <h3>Уборка квартир</h3>
-                        <p>Комплексная уборка жилых помещений любой площади</p>
-                        <ul class="service-features">
-                            <li><i class="fas fa-check"></i> Влажная уборка полов</li>
-                            <li><i class="fas fa-check"></i> Очистка пыли</li>
-                            <li><i class="fas fa-check"></i> Мойка окон</li>
-                            <li><i class="fas fa-check"></i> Дезинфекция сантехники</li>
+                        <h3 class="service-title">Уборка квартир</h3>
+                        <p class="service-description">Комплексная уборка жилых помещений любой площади</p>
+                        <ul class="service-list">
+                            <li><i class="fas fa-check-circle"></i> Влажная уборка полов</li>
+                            <li><i class="fas fa-check-circle"></i> Очистка пыли</li>
+                            <li><i class="fas fa-check-circle"></i> Мойка окон</li>
+                            <li><i class="fas fa-check-circle"></i> Дезинфекция сантехники</li>
                         </ul>
-                        <div class="service-price">от 2 500 ₽</div>
-                        <button class="btn btn-secondary" onclick="scrollToSection('contact')">Заказать</button>
+                        <div class="service-footer">
+                            <span class="service-price">от 2 500 ₽</span>
+                            <button class="btn btn-secondary" onclick="scrollToSection('contact')">Заказать</button>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="service-card animate-on-scroll">
-                    <div class="service-image">
-                        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=400&h=300&fit=crop" alt="Уборка офисов">
+                <div class="service-card">
+                    <div class="service-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=500&h=350&fit=crop" alt="Уборка офисов" class="service-image">
                     </div>
                     <div class="service-content">
-                        <h3>Уборка офисов</h3>
-                        <p>Поддержание чистоты в рабочих помещениях</p>
-                        <ul class="service-features">
-                            <li><i class="fas fa-check"></i> Уборка рабочих мест</li>
-                            <li><i class="fas fa-check"></i> Чистка ковровых покрытий</li>
-                            <li><i class="fas fa-check"></i> Вынос мусора</li>
-                            <li><i class="fas fa-check"></i> Пополнение расходников</li>
+                        <h3 class="service-title">Уборка офисов</h3>
+                        <p class="service-description">Поддержание чистоты в рабочих помещениях</p>
+                        <ul class="service-list">
+                            <li><i class="fas fa-check-circle"></i> Уборка рабочих мест</li>
+                            <li><i class="fas fa-check-circle"></i> Чистка ковровых покрытий</li>
+                            <li><i class="fas fa-check-circle"></i> Вынос мусора</li>
+                            <li><i class="fas fa-check-circle"></i> Пополнение расходников</li>
                         </ul>
-                        <div class="service-price">от 5 000 ₽</div>
-                        <button class="btn btn-secondary" onclick="scrollToSection('contact')">Заказать</button>
+                        <div class="service-footer">
+                            <span class="service-price">от 5 000 ₽</span>
+                            <button class="btn btn-secondary" onclick="scrollToSection('contact')">Заказать</button>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="service-card animate-on-scroll">
-                    <div class="service-image">
-                        <img src="https://images.unsplash.com/photo-1527512860163-5e8a09d4b6f7?w=400&h=300&fit=crop" alt="Генеральная уборка">
+                <div class="service-card">
+                    <div class="service-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1527512860163-5e8a09d4b6f7?w=500&h=350&fit=crop" alt="Генеральная уборка" class="service-image">
                     </div>
                     <div class="service-content">
-                        <h3>Генеральная уборка</h3>
-                        <p>Глубокая очистка всех поверхностей и труднодоступных мест</p>
-                        <ul class="service-features">
-                            <li><i class="fas fa-check"></i> Чистка стен и потолков</li>
-                            <li><i class="fas fa-check"></i> Мойка батарей</li>
-                            <li><i class="fas fa-check"></i> Химчистка мебели</li>
-                            <li><i class="fas fa-check"></i> Дезинфекция</li>
+                        <h3 class="service-title">Генеральная уборка</h3>
+                        <p class="service-description">Глубокая очистка всех поверхностей и труднодоступных мест</p>
+                        <ul class="service-list">
+                            <li><i class="fas fa-check-circle"></i> Чистка стен и потолков</li>
+                            <li><i class="fas fa-check-circle"></i> Мойка батарей</li>
+                            <li><i class="fas fa-check-circle"></i> Химчистка мебели</li>
+                            <li><i class="fas fa-check-circle"></i> Дезинфекция</li>
                         </ul>
-                        <div class="service-price">от 8 000 ₽</div>
-                        <button class="btn btn-secondary" onclick="scrollToSection('contact')">Заказать</button>
+                        <div class="service-footer">
+                            <span class="service-price">от 8 000 ₽</span>
+                            <button class="btn btn-secondary" onclick="scrollToSection('contact')">Заказать</button>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="service-card animate-on-scroll">
-                    <div class="service-image">
-                        <img src="https://images.unsplash.com/photo-1584622050111-993a426fbf0a?w=400&h=300&fit=crop" alt="Химчистка">
+                <div class="service-card">
+                    <div class="service-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1584622050111-993a426fbf0a?w=500&h=350&fit=crop" alt="Химчистка" class="service-image">
                     </div>
                     <div class="service-content">
-                        <h3>Химчистка мебели</h3>
-                        <p>Профессиональная чистка мягкой мебели и ковров</p>
-                        <ul class="service-features">
-                            <li><i class="fas fa-check"></i> Удаление пятен</li>
-                            <li><i class="fas fa-check"></i> Устранение запахов</li>
-                            <li><i class="fas fa-check"></i> Защита от загрязнений</li>
-                            <li><i class="fas fa-check"></i> Сушка на месте</li>
+                        <h3 class="service-title">Химчистка мебели</h3>
+                        <p class="service-description">Профессиональная чистка мягкой мебели и ковров</p>
+                        <ul class="service-list">
+                            <li><i class="fas fa-check-circle"></i> Удаление пятен</li>
+                            <li><i class="fas fa-check-circle"></i> Устранение запахов</li>
+                            <li><i class="fas fa-check-circle"></i> Защита от загрязнений</li>
+                            <li><i class="fas fa-check-circle"></i> Сушка на месте</li>
                         </ul>
-                        <div class="service-price">от 1 500 ₽</div>
-                        <button class="btn btn-secondary" onclick="scrollToSection('contact')">Заказать</button>
+                        <div class="service-footer">
+                            <span class="service-price">от 1 500 ₽</span>
+                            <button class="btn btn-secondary" onclick="scrollToSection('contact')">Заказать</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- О нас -->
+    <!-- О компании -->
     <section class="about" id="about">
         <div class="container">
-            <div class="about-content">
-                <div class="about-images animate-on-scroll">
-                    <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=600&h=400&fit=crop" alt="Наша команда" class="about-img-main">
-                    <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=300&h=200&fit=crop" alt="Процесс уборки" class="about-img-small">
+            <div class="about-wrapper">
+                <div class="about-images">
+                    <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=600&h=500&fit=crop" alt="Наша команда" class="about-img-main">
+                    <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=300&h=250&fit=crop" alt="Процесс уборки" class="about-img-small">
                 </div>
-                <div class="about-text animate-on-scroll">
+                <div class="about-content">
                     <h2 class="section-title">О компании CleanPro</h2>
-                    <p>Мы работаем на рынке клининговых услуг более 10 лет и зарекомендовали себя как надежный партнер в сфере чистоты и порядка.</p>
-                    <p>Наша миссия — делать жизнь наших клиентов комфортнее, освобождая время для важных дел и семьи.</p>
+                    <p class="about-text">
+                        Мы работаем на рынке клининговых услуг более 10 лет и зарекомендовали себя как надежный партнер в сфере чистоты и порядка.
+                    </p>
+                    <p class="about-text">
+                        Наша миссия — делать жизнь наших клиентов комфортнее, освобождая время для важных дел и семьи.
+                    </p>
                     
-                    <div class="about-features">
-                        <div class="about-feature">
-                            <i class="fas fa-user-shield"></i>
+                    <div class="about-features-list">
+                        <div class="about-feature-item">
+                            <div class="about-feature-icon">
+                                <i class="fas fa-user-shield"></i>
+                            </div>
                             <span>Проверенный персонал</span>
                         </div>
-                        <div class="about-feature">
-                            <i class="fas fa-medal"></i>
+                        <div class="about-feature-item">
+                            <div class="about-feature-icon">
+                                <i class="fas fa-medal"></i>
+                            </div>
                             <span>Сертифицированные средства</span>
                         </div>
-                        <div class="about-feature">
-                            <i class="fas fa-sync-alt"></i>
+                        <div class="about-feature-item">
+                            <div class="about-feature-icon">
+                                <i class="fas fa-sync-alt"></i>
+                            </div>
                             <span>Гарантия результата</span>
                         </div>
-                        <div class="about-feature">
-                            <i class="fas fa-headset"></i>
+                        <div class="about-feature-item">
+                            <div class="about-feature-icon">
+                                <i class="fas fa-headset"></i>
+                            </div>
                             <span>Поддержка 24/7</span>
                         </div>
                     </div>
@@ -237,71 +267,74 @@
         </div>
     </section>
 
-    <!-- Цены -->
+    <!-- Тарифы -->
     <section class="pricing" id="pricing">
         <div class="container">
-            <div class="section-header animate-on-scroll">
+            <div class="section-header">
                 <h2 class="section-title">Тарифные планы</h2>
                 <p class="section-subtitle">Выберите подходящий вариант уборки</p>
             </div>
             
             <div class="pricing-grid">
-                <div class="pricing-card animate-on-scroll">
+                <div class="pricing-card">
                     <div class="pricing-header">
-                        <h3>Базовый</h3>
-                        <div class="pricing-price">
-                            <span class="price">2 500</span>
-                            <span class="period">₽ / уборка</span>
+                        <h3 class="pricing-title">Базовый</h3>
+                        <div class="pricing-price-wrapper">
+                            <span class="pricing-currency">от</span>
+                            <span class="pricing-value">2 500</span>
+                            <span class="pricing-period">₽ / уборка</span>
                         </div>
                     </div>
-                    <ul class="pricing-features">
-                        <li><i class="fas fa-check"></i> Сухая уборка полов</li>
-                        <li><i class="fas fa-check"></i> Удаление пыли</li>
-                        <li><i class="fas fa-check"></i> Протирка зеркал</li>
-                        <li><i class="fas fa-check"></i> Вынос мусора</li>
-                        <li class="disabled"><i class="fas fa-times"></i> Мойка окон</li>
-                        <li class="disabled"><i class="fas fa-times"></i> Химчистка мебели</li>
+                    <ul class="pricing-list">
+                        <li class="pricing-item"><i class="fas fa-check"></i> Сухая уборка полов</li>
+                        <li class="pricing-item"><i class="fas fa-check"></i> Удаление пыли</li>
+                        <li class="pricing-item"><i class="fas fa-check"></i> Протирка зеркал</li>
+                        <li class="pricing-item"><i class="fas fa-check"></i> Вынос мусора</li>
+                        <li class="pricing-item disabled"><i class="fas fa-times"></i> Мойка окон</li>
+                        <li class="pricing-item disabled"><i class="fas fa-times"></i> Химчистка мебели</li>
                     </ul>
-                    <button class="btn btn-outline" onclick="scrollToSection('contact')">Выбрать</button>
+                    <button class="btn btn-outline btn-block" onclick="scrollToSection('contact')">Выбрать тариф</button>
                 </div>
                 
-                <div class="pricing-card pricing-card-popular animate-on-scroll">
-                    <div class="popular-badge">Популярный</div>
+                <div class="pricing-card pricing-card-popular">
+                    <div class="popular-badge">Популярный выбор</div>
                     <div class="pricing-header">
-                        <h3>Стандарт</h3>
-                        <div class="pricing-price">
-                            <span class="price">5 000</span>
-                            <span class="period">₽ / уборка</span>
+                        <h3 class="pricing-title">Стандарт</h3>
+                        <div class="pricing-price-wrapper">
+                            <span class="pricing-currency">от</span>
+                            <span class="pricing-value">5 000</span>
+                            <span class="pricing-period">₽ / уборка</span>
                         </div>
                     </div>
-                    <ul class="pricing-features">
-                        <li><i class="fas fa-check"></i> Все из Базового</li>
-                        <li><i class="fas fa-check"></i> Влажная уборка</li>
-                        <li><i class="fas fa-check"></i> Мойка сантехники</li>
-                        <li><i class="fas fa-check"></i> Чистка кухни</li>
-                        <li><i class="fas fa-check"></i> Мойка окон (до 4 шт)</li>
-                        <li class="disabled"><i class="fas fa-times"></i> Химчистка мебели</li>
+                    <ul class="pricing-list">
+                        <li class="pricing-item"><i class="fas fa-check"></i> Всё из Базового</li>
+                        <li class="pricing-item"><i class="fas fa-check"></i> Влажная уборка</li>
+                        <li class="pricing-item"><i class="fas fa-check"></i> Мойка сантехники</li>
+                        <li class="pricing-item"><i class="fas fa-check"></i> Чистка кухни</li>
+                        <li class="pricing-item"><i class="fas fa-check"></i> Мойка окон (до 4 шт)</li>
+                        <li class="pricing-item disabled"><i class="fas fa-times"></i> Химчистка мебели</li>
                     </ul>
-                    <button class="btn btn-primary" onclick="scrollToSection('contact')">Выбрать</button>
+                    <button class="btn btn-primary btn-block" onclick="scrollToSection('contact')">Выбрать тариф</button>
                 </div>
                 
-                <div class="pricing-card animate-on-scroll">
+                <div class="pricing-card">
                     <div class="pricing-header">
-                        <h3>Премиум</h3>
-                        <div class="pricing-price">
-                            <span class="price">10 000</span>
-                            <span class="period">₽ / уборка</span>
+                        <h3 class="pricing-title">Премиум</h3>
+                        <div class="pricing-price-wrapper">
+                            <span class="pricing-currency">от</span>
+                            <span class="pricing-value">10 000</span>
+                            <span class="pricing-period">₽ / уборка</span>
                         </div>
                     </div>
-                    <ul class="pricing-features">
-                        <li><i class="fas fa-check"></i> Все из Стандарта</li>
-                        <li><i class="fas fa-check"></i> Генеральная уборка</li>
-                        <li><i class="fas fa-check"></i> Химчистка мебели</li>
-                        <li><i class="fas fa-check"></i> Мойка всех окон</li>
-                        <li><i class="fas fa-check"></i> Дезинфекция</li>
-                        <li><i class="fas fa-check"></i> Приоритетное обслуживание</li>
+                    <ul class="pricing-list">
+                        <li class="pricing-item"><i class="fas fa-check"></i> Всё из Стандарта</li>
+                        <li class="pricing-item"><i class="fas fa-check"></i> Генеральная уборка</li>
+                        <li class="pricing-item"><i class="fas fa-check"></i> Химчистка мебели</li>
+                        <li class="pricing-item"><i class="fas fa-check"></i> Мойка всех окон</li>
+                        <li class="pricing-item"><i class="fas fa-check"></i> Дезинфекция</li>
+                        <li class="pricing-item"><i class="fas fa-check"></i> Приоритетное обслуживание</li>
                     </ul>
-                    <button class="btn btn-outline" onclick="scrollToSection('contact')">Выбрать</button>
+                    <button class="btn btn-outline btn-block" onclick="scrollToSection('contact')">Выбрать тариф</button>
                 </div>
             </div>
         </div>
