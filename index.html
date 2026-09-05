@@ -3,213 +3,225 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CleanPro - Профессиональная клининговая компания</title>
-    <!-- Подключение шрифтов Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-    <!-- Иконки Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Стили -->
+    <title>Уютная Уборка — Профессиональный клининг</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Outfit:wght@700;800&display=swap" rel="stylesheet">
+
+    <!-- Main Stylesheet -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Шапка сайта -->
-    <header class="header">
-        <div class="container header-container">
-            <a href="#" class="logo">
-                <i class="fas fa-sparkles logo-icon"></i>
-                <span class="logo-text">CleanPro</span>
-            </a>
-            
-            <nav class="nav-menu" id="navMenu">
-                <ul class="nav-list">
-                    <li><a href="#hero" class="nav-link active">Главная</a></li>
-                    <li><a href="#services" class="nav-link">Услуги</a></li>
-                    <li><a href="#about" class="nav-link">О компании</a></li>
-                    <li><a href="#pricing" class="nav-link">Тарифы</a></li>
-                    <li><a href="#reviews" class="nav-link">Отзывы</a></li>
-                    <li><a href="#contact" class="nav-link">Контакты</a></li>
-                </ul>
-            </nav>
-            
-            <div class="header-actions">
-                <a href="tel:+79991234567" class="phone-link">
-                    <i class="fas fa-phone"></i>
-                    <span>+7 (999) 123-45-67</span>
+
+    <!-- ===== HEADER ===== -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header__inner">
+                <a href="#" class="header__logo">
+                    <span class="header__logo-icon">✦</span>
+                    Уютная Уборка
                 </a>
-                <button class="btn btn-primary header-btn" onclick="scrollToSection('contact')">
-                    Заказать звонок
-                </button>
-                <button class="burger-menu" id="burgerBtn" aria-label="Меню">
-                    <span></span>
-                    <span></span>
-                    <span></span>
+                <nav class="header__nav">
+                    <a href="#services" class="header__nav-link">Услуги</a>
+                    <a href="#about" class="header__nav-link">О нас</a>
+                    <a href="#portfolio" class="header__nav-link">Портфолио</a>
+                    <a href="#contacts" class="header__nav-link">Контакты</a>
+                </nav>
+                <a href="tel:+79003673815" class="header__phone">+7 (900) 367-38-15</a>
+                <button class="header__btn" data-scroll="#cta">Заказать звонок</button>
+                <button class="header__burger" id="burger" aria-label="Меню">
+                    <span class="header__burger-line"></span>
+                    <span class="header__burger-line"></span>
+                    <span class="header__burger-line"></span>
                 </button>
             </div>
         </div>
     </header>
 
-    <!-- Главный экран (Hero Section) -->
+    <!-- ===== HERO ===== -->
     <section class="hero" id="hero">
-        <div class="container hero-container">
-            <div class="hero-content">
-                <h1 class="hero-title">
-                    Профессиональная уборка<br>
-                    <span class="highlight">вашего дома и офиса</span>
-                </h1>
-                <p class="hero-subtitle">
-                    Чистота и комфорт в каждом уголке. Доверьте уборку профессионалам!
-                </p>
-                <div class="hero-buttons">
-                    <button class="btn btn-primary btn-lg" onclick="scrollToSection('contact')">
-                        <i class="fas fa-calendar-check"></i>
-                        Заказать уборку
-                    </button>
-                    <button class="btn btn-outline btn-lg" onclick="scrollToSection('services')">
-                        <i class="fas fa-play-circle"></i>
-                        Узнать больше
-                    </button>
+        <div class="container">
+            <div class="hero__inner">
+                <div class="hero__content">
+                    <div class="hero__badge">
+                        <span class="hero__badge-dot"></span>
+                        Клининговая служба в Москве и области
+                    </div>
+                    <h1 class="hero__title">Профессиональная уборка <span>любой сложности</span></h1>
+                    <p class="hero__subtitle">Освободите время для важного. Мы наведём безупречный порядок в вашей квартире, загородном доме или офисе с использованием сертифицированных эко-средств.</p>
+                    <div class="hero__actions">
+                        <button class="hero__btn hero__btn--primary" data-scroll="#cta">Заказать уборку</button>
+                        <button class="hero__btn hero__btn--outline" data-scroll="#services">Узнать стоимость</button>
+                    </div>
                 </div>
-                <div class="hero-stats">
-                    <div class="stat-item">
-                        <span class="stat-number">5000+</span>
-                        <span class="stat-label">Довольных клиентов</span>
+                <div class="hero__image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=600&h=500&fit=crop" alt="Профессиональная уборка" class="hero__image">
+                    <div class="hero__image-decoration"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ADVANTAGES ===== -->
+    <section class="advantages section" id="advantages">
+        <div class="container">
+            <div class="section__header">
+                <span class="section__label">Наши преимущества</span>
+                <h2 class="section__title">Почему выбирают нас</h2>
+                <p class="section__subtitle">Мы создаём идеальный порядок и окружаем вас заботой, уделяя внимание каждой детали.</p>
+            </div>
+            <div class="advantages__grid">
+                <div class="advantage-card fade-in">
+                    <div class="advantage-card__icon">🌿</div>
+                    <h3 class="advantage-card__title">Экологичные средства</h3>
+                    <p class="advantage-card__text">Безопасные гипоаллергенные составы, безвредные для детей и домашних питомцев.</p>
+                </div>
+                <div class="advantage-card fade-in">
+                    <div class="advantage-card__icon">👥</div>
+                    <h3 class="advantage-card__title">Опытная команда</h3>
+                    <p class="advantage-card__text">Все клинеры проходят строгое обучение, проверку службой безопасности и сертификацию.</p>
+                </div>
+                <div class="advantage-card fade-in">
+                    <div class="advantage-card__icon">✅</div>
+                    <h3 class="advantage-card__title">Гарантия качества</h3>
+                    <p class="advantage-card__text">Если вас не устроит результат, мы оперативно вернёмся и всё переделаем абсолютно бесплатно.</p>
+                </div>
+                <div class="advantage-card fade-in">
+                    <div class="advantage-card__icon">💰</div>
+                    <h3 class="advantage-card__title">Доступные цены</h3>
+                    <p class="advantage-card__text">Прозрачные тарифы без скрытых доплат. Фиксированная стоимость согласуется до начала работ.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SERVICES ===== -->
+    <section class="services section" id="services">
+        <div class="container">
+            <div class="section__header">
+                <span class="section__label">Услуги клининга</span>
+                <h2 class="section__title">Наши профессиональные решения</h2>
+                <p class="section__subtitle">Выберите подходящий вид уборки. Мы приедем со всем необходимым оборудованием и моющими средствами.</p>
+            </div>
+            <div class="services__grid">
+                <div class="service-card fade-in">
+                    <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=250&fit=crop" alt="Генеральная уборка" class="service-card__image">
+                    <div class="service-card__body">
+                        <h3 class="service-card__title">Генеральная уборка</h3>
+                        <p class="service-card__price">Стоимость: от 4 500 ₽</p>
+                        <a href="#cta" class="service-card__link" data-scroll="#cta">Подробнее →</a>
                     </div>
-                    <div class="stat-divider"></div>
-                    <div class="stat-item">
-                        <span class="stat-number">10+</span>
-                        <span class="stat-label">Лет опыта</span>
+                </div>
+                <div class="service-card fade-in">
+                    <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=400&h=250&fit=crop" alt="Уборка после ремонта" class="service-card__image">
+                    <div class="service-card__body">
+                        <h3 class="service-card__title">Уборка после ремонта</h3>
+                        <p class="service-card__price">Стоимость: от 7 900 ₽</p>
+                        <a href="#cta" class="service-card__link" data-scroll="#cta">Подробнее →</a>
                     </div>
-                    <div class="stat-divider"></div>
-                    <div class="stat-item">
-                        <span class="stat-number">100%</span>
-                        <span class="stat-label">Гарантия качества</span>
+                </div>
+                <div class="service-card fade-in">
+                    <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=400&h=250&fit=crop" alt="Мойка окон" class="service-card__image">
+                    <div class="service-card__body">
+                        <h3 class="service-card__title">Мойка окон</h3>
+                        <p class="service-card__price">Стоимость: от 250 ₽ / шт</p>
+                        <a href="#cta" class="service-card__link" data-scroll="#cta">Подробнее →</a>
+                    </div>
+                </div>
+                <div class="service-card fade-in">
+                    <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&h=250&fit=crop" alt="Химчистка мебели" class="service-card__image">
+                    <div class="service-card__body">
+                        <h3 class="service-card__title">Химчистка мебели</h3>
+                        <p class="service-card__price">Стоимость: от 1 800 ₽</p>
+                        <a href="#cta" class="service-card__link" data-scroll="#cta">Подробнее →</a>
+                    </div>
+                </div>
+                <div class="service-card fade-in">
+                    <img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=400&h=250&fit=crop" alt="Уборка офисов" class="service-card__image">
+                    <div class="service-card__body">
+                        <h3 class="service-card__title">Уборка офисов</h3>
+                        <p class="service-card__price">Стоимость: от 6 000 ₽</p>
+                        <a href="#cta" class="service-card__link" data-scroll="#cta">Подробнее →</a>
+                    </div>
+                </div>
+                <div class="service-card fade-in">
+                    <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=400&h=250&fit=crop" alt="Ежедневная уборка" class="service-card__image">
+                    <div class="service-card__body">
+                        <h3 class="service-card__title">Ежедневная уборка</h3>
+                        <p class="service-card__price">Стоимость: от 2 200 ₽</p>
+                        <a href="#cta" class="service-card__link" data-scroll="#cta">Подробнее →</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Преимущества -->
-    <section class="features" id="features">
+    <!-- ===== PORTFOLIO ===== -->
+    <section class="portfolio section" id="portfolio">
         <div class="container">
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon-wrapper">
-                        <i class="fas fa-clock feature-icon"></i>
-                    </div>
-                    <h3 class="feature-title">Быстро</h3>
-                    <p class="feature-text">Выполняем работу в срок без потери качества</p>
+            <div class="section__header">
+                <span class="section__label">Портфолио</span>
+                <h2 class="section__title">Результаты нашей работы</h2>
+                <p class="section__subtitle">Загляните в галерею наших завершённых проектов. Кристальная чистота, которая видна невооружённым глазом.</p>
+            </div>
+            <div class="portfolio__grid">
+                <div class="portfolio__item fade-in">
+                    <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=400&h=300&fit=crop" alt="Уборка гостиной">
+                    <div class="portfolio__item-overlay"><span class="portfolio__item-title">Гостиная</span></div>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon-wrapper">
-                        <i class="fas fa-shield-alt feature-icon"></i>
-                    </div>
-                    <h3 class="feature-title">Надежно</h3>
-                    <p class="feature-text">Все сотрудники проверены и застрахованы</p>
+                <div class="portfolio__item fade-in">
+                    <img src="https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=400&h=300&fit=crop" alt="Уборка ванной">
+                    <div class="portfolio__item-overlay"><span class="portfolio__item-title">Ванная комната</span></div>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon-wrapper">
-                        <i class="fas fa-leaf feature-icon"></i>
-                    </div>
-                    <h3 class="feature-title">Экологично</h3>
-                    <p class="feature-text">Используем безопасные моющие средства</p>
+                <div class="portfolio__item fade-in">
+                    <img src="https://images.unsplash.com/photo-1556909114-44e3e70034e2?w=400&h=300&fit=crop" alt="Уборка кухни">
+                    <div class="portfolio__item-overlay"><span class="portfolio__item-title">Кухня</span></div>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon-wrapper">
-                        <i class="fas fa-wallet feature-icon"></i>
-                    </div>
-                    <h3 class="feature-title">Доступно</h3>
-                    <p class="feature-text">Конкурентные цены и система скидок</p>
+                <div class="portfolio__item fade-in">
+                    <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=400&h=300&fit=crop" alt="Уборка офиса">
+                    <div class="portfolio__item-overlay"><span class="portfolio__item-title">Офис</span></div>
+                </div>
+                <div class="portfolio__item fade-in">
+                    <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=400&h=300&fit=crop" alt="Уборка спальни">
+                    <div class="portfolio__item-overlay"><span class="portfolio__item-title">Спальня</span></div>
+                </div>
+                <div class="portfolio__item fade-in">
+                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=400&h=300&fit=crop" alt="Уборка загородного дома">
+                    <div class="portfolio__item-overlay"><span class="portfolio__item-title">Загородный дом</span></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Услуги -->
-    <section class="services" id="services">
+    <!-- ===== ABOUT ===== -->
+    <section class="about section" id="about">
         <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Наши услуги</h2>
-                <p class="section-subtitle">Полный спектр клининговых услуг для вашего комфорта</p>
-            </div>
-            
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-image-wrapper">
-                        <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=500&h=350&fit=crop" alt="Уборка квартир" class="service-image">
-                    </div>
-                    <div class="service-content">
-                        <h3 class="service-title">Уборка квартир</h3>
-                        <p class="service-description">Комплексная уборка жилых помещений любой площади</p>
-                        <ul class="service-list">
-                            <li><i class="fas fa-check-circle"></i> Влажная уборка полов</li>
-                            <li><i class="fas fa-check-circle"></i> Очистка пыли</li>
-                            <li><i class="fas fa-check-circle"></i> Мойка окон</li>
-                            <li><i class="fas fa-check-circle"></i> Дезинфекция сантехники</li>
-                        </ul>
-                        <div class="service-footer">
-                            <span class="service-price">от 2 500 ₽</span>
-                            <button class="btn btn-secondary" onclick="scrollToSection('contact')">Заказать</button>
-                        </div>
+            <div class="about__inner">
+                <div class="about__image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=600&h=450&fit=crop" alt="Наша команда" class="about__image">
+                    <div class="about__stats-badge">
+                        <div class="about__stats-number">100%</div>
+                        <div class="about__stats-text">Довольных клиентов<br>гарантируем</div>
                     </div>
                 </div>
-                
-                <div class="service-card">
-                    <div class="service-image-wrapper">
-                        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=500&h=350&fit=crop" alt="Уборка офисов" class="service-image">
-                    </div>
-                    <div class="service-content">
-                        <h3 class="service-title">Уборка офисов</h3>
-                        <p class="service-description">Поддержание чистоты в рабочих помещениях</p>
-                        <ul class="service-list">
-                            <li><i class="fas fa-check-circle"></i> Уборка рабочих мест</li>
-                            <li><i class="fas fa-check-circle"></i> Чистка ковровых покрытий</li>
-                            <li><i class="fas fa-check-circle"></i> Вынос мусора</li>
-                            <li><i class="fas fa-check-circle"></i> Пополнение расходников</li>
-                        </ul>
-                        <div class="service-footer">
-                            <span class="service-price">от 5 000 ₽</span>
-                            <button class="btn btn-secondary" onclick="scrollToSection('contact')">Заказать</button>
+                <div class="about__content">
+                    <span class="about__label">Клининговая компания №1</span>
+                    <h2 class="about__title">Заботимся о вашем уюте с 2018 года</h2>
+                    <p class="about__text">Уютная уборка — это синоним безупречного сервиса и доверия. За годы успешной работы мы разработали уникальные стандарты уборки, основанные на лучших мировых практиках. Мы дорожим своей репутацией и гарантируем идеальный порядок.</p>
+                    <div class="about__stats">
+                        <div class="about__stat-item">
+                            <div class="about__stat-number">6+</div>
+                            <div class="about__stat-label">Лет опыта</div>
                         </div>
-                    </div>
-                </div>
-                
-                <div class="service-card">
-                    <div class="service-image-wrapper">
-                        <img src="https://images.unsplash.com/photo-1527512860163-5e8a09d4b6f7?w=500&h=350&fit=crop" alt="Генеральная уборка" class="service-image">
-                    </div>
-                    <div class="service-content">
-                        <h3 class="service-title">Генеральная уборка</h3>
-                        <p class="service-description">Глубокая очистка всех поверхностей и труднодоступных мест</p>
-                        <ul class="service-list">
-                            <li><i class="fas fa-check-circle"></i> Чистка стен и потолков</li>
-                            <li><i class="fas fa-check-circle"></i> Мойка батарей</li>
-                            <li><i class="fas fa-check-circle"></i> Химчистка мебели</li>
-                            <li><i class="fas fa-check-circle"></i> Дезинфекция</li>
-                        </ul>
-                        <div class="service-footer">
-                            <span class="service-price">от 8 000 ₽</span>
-                            <button class="btn btn-secondary" onclick="scrollToSection('contact')">Заказать</button>
+                        <div class="about__stat-item">
+                            <div class="about__stat-number">4 200+</div>
+                            <div class="about__stat-label">Довольных клиентов</div>
                         </div>
-                    </div>
-                </div>
-                
-                <div class="service-card">
-                    <div class="service-image-wrapper">
-                        <img src="https://images.unsplash.com/photo-1584622050111-993a426fbf0a?w=500&h=350&fit=crop" alt="Химчистка" class="service-image">
-                    </div>
-                    <div class="service-content">
-                        <h3 class="service-title">Химчистка мебели</h3>
-                        <p class="service-description">Профессиональная чистка мягкой мебели и ковров</p>
-                        <ul class="service-list">
-                            <li><i class="fas fa-check-circle"></i> Удаление пятен</li>
-                            <li><i class="fas fa-check-circle"></i> Устранение запахов</li>
-                            <li><i class="fas fa-check-circle"></i> Защита от загрязнений</li>
-                            <li><i class="fas fa-check-circle"></i> Сушка на месте</li>
-                        </ul>
-                        <div class="service-footer">
-                            <span class="service-price">от 1 500 ₽</span>
-                            <button class="btn btn-secondary" onclick="scrollToSection('contact')">Заказать</button>
+                        <div class="about__stat-item">
+                            <div class="about__stat-number">12к+</div>
+                            <div class="about__stat-label">Успешных уборок</div>
                         </div>
                     </div>
                 </div>
@@ -217,418 +229,178 @@
         </div>
     </section>
 
-    <!-- О компании -->
-    <section class="about" id="about">
+    <!-- ===== STEPS ===== -->
+    <section class="steps section" id="steps">
         <div class="container">
-            <div class="about-wrapper">
-                <div class="about-images">
-                    <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=600&h=500&fit=crop" alt="Наша команда" class="about-img-main">
-                    <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=300&h=250&fit=crop" alt="Процесс уборки" class="about-img-small">
+            <div class="section__header">
+                <span class="section__label">Как мы работаем</span>
+                <h2 class="section__title">4 простых шага к безупречной чистоте</h2>
+                <p class="section__subtitle">Сделать заказ и наслаждаться своим пространством ещё никогда не было так просто.</p>
+            </div>
+            <div class="steps__grid">
+                <div class="step-card fade-in">
+                    <div class="step-card__number">01</div>
+                    <h3 class="step-card__title">Оставьте заявку</h3>
+                    <p class="step-card__text">Заполните форму на сайте за 1 минуту или просто позвоните нам по телефону.</p>
                 </div>
-                <div class="about-content">
-                    <h2 class="section-title">О компании CleanPro</h2>
-                    <p class="about-text">
-                        Мы работаем на рынке клининговых услуг более 10 лет и зарекомендовали себя как надежный партнер в сфере чистоты и порядка.
-                    </p>
-                    <p class="about-text">
-                        Наша миссия — делать жизнь наших клиентов комфортнее, освобождая время для важных дел и семьи.
-                    </p>
-                    
-                    <div class="about-features-list">
-                        <div class="about-feature-item">
-                            <div class="about-feature-icon">
-                                <i class="fas fa-user-shield"></i>
-                            </div>
-                            <span>Проверенный персонал</span>
-                        </div>
-                        <div class="about-feature-item">
-                            <div class="about-feature-icon">
-                                <i class="fas fa-medal"></i>
-                            </div>
-                            <span>Сертифицированные средства</span>
-                        </div>
-                        <div class="about-feature-item">
-                            <div class="about-feature-icon">
-                                <i class="fas fa-sync-alt"></i>
-                            </div>
-                            <span>Гарантия результата</span>
-                        </div>
-                        <div class="about-feature-item">
-                            <div class="about-feature-icon">
-                                <i class="fas fa-headset"></i>
-                            </div>
-                            <span>Поддержка 24/7</span>
-                        </div>
-                    </div>
-                    
-                    <button class="btn btn-primary" onclick="scrollToSection('contact')">Связаться с нами</button>
+                <div class="step-card fade-in">
+                    <div class="step-card__number">02</div>
+                    <h3 class="step-card__title">Оценка стоимости</h3>
+                    <p class="step-card__text">Рассчитаем точную фиксированную стоимость и согласуем удобное время приезда.</p>
+                </div>
+                <div class="step-card fade-in">
+                    <div class="step-card__number">03</div>
+                    <h3 class="step-card__title">Выполнение работ</h3>
+                    <p class="step-card__text">В назначенное время приедут сертифицированные клинеры и наведут чистоту.</p>
+                </div>
+                <div class="step-card fade-in">
+                    <div class="step-card__number">04</div>
+                    <h3 class="step-card__title">Приёмка результата</h3>
+                    <p class="step-card__text">Вы принимаете работу, оцениваете качество и производите оплату удобным способом.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Тарифы -->
-    <section class="pricing" id="pricing">
+    <!-- ===== REVIEWS ===== -->
+    <section class="reviews section" id="reviews">
         <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Тарифные планы</h2>
-                <p class="section-subtitle">Выберите подходящий вариант уборки</p>
+            <div class="section__header">
+                <span class="section__label">Отзывы</span>
+                <h2 class="section__title">Что о нас говорят клиенты</h2>
+                <p class="section__subtitle">Отзывы реальных людей — главный показатель нашего профессионализма и преданности своему делу.</p>
             </div>
-            
-            <div class="pricing-grid">
-                <div class="pricing-card">
-                    <div class="pricing-header">
-                        <h3 class="pricing-title">Базовый</h3>
-                        <div class="pricing-price-wrapper">
-                            <span class="pricing-currency">от</span>
-                            <span class="pricing-value">2 500</span>
-                            <span class="pricing-period">₽ / уборка</span>
+            <div class="reviews__grid">
+                <div class="review-card fade-in">
+                    <div class="review-card__stars">★★★★★</div>
+                    <p class="review-card__text">«Заказывала генеральную уборку после переезда. Команда приехала вовремя, со всеми инструментами. Квартира просто засияла! Отмыли даже те пятна на кухонном фартуке, с которыми я не могла справиться сама. Огромное спасибо!»</p>
+                    <div class="review-card__author">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&h=80&fit=crop&crop=face" alt="Екатерина" class="review-card__avatar">
+                        <div>
+                            <div class="review-card__name">Екатерина Соколова</div>
+                            <div class="review-card__role">Владельцы квартир, 75 кв.м.</div>
                         </div>
                     </div>
-                    <ul class="pricing-list">
-                        <li class="pricing-item"><i class="fas fa-check"></i> Сухая уборка полов</li>
-                        <li class="pricing-item"><i class="fas fa-check"></i> Удаление пыли</li>
-                        <li class="pricing-item"><i class="fas fa-check"></i> Протирка зеркал</li>
-                        <li class="pricing-item"><i class="fas fa-check"></i> Вынос мусора</li>
-                        <li class="pricing-item disabled"><i class="fas fa-times"></i> Мойка окон</li>
-                        <li class="pricing-item disabled"><i class="fas fa-times"></i> Химчистка мебели</li>
-                    </ul>
-                    <button class="btn btn-outline btn-block" onclick="scrollToSection('contact')">Выбрать тариф</button>
                 </div>
-                
-                <div class="pricing-card pricing-card-popular">
-                    <div class="popular-badge">Популярный выбор</div>
-                    <div class="pricing-header">
-                        <h3 class="pricing-title">Стандарт</h3>
-                        <div class="pricing-price-wrapper">
-                            <span class="pricing-currency">от</span>
-                            <span class="pricing-value">5 000</span>
-                            <span class="pricing-period">₽ / уборка</span>
+                <div class="review-card fade-in">
+                    <div class="review-card__stars">★★★★★</div>
+                    <p class="review-card__text">«Сотрудничаем с УютПро на регулярной основе для еженедельной поддерживающей уборки офиса. Всегда безупречно, быстро и деликатно. Клинеры вежливые, работают аккуратно. Отличный сервис за разумные деньги!»</p>
+                    <div class="review-card__author">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop&crop=face" alt="Михаил" class="review-card__avatar">
+                        <div>
+                            <div class="review-card__name">Михаил Кузнецов</div>
+                            <div class="review-card__role">Предприниматель</div>
                         </div>
                     </div>
-                    <ul class="pricing-list">
-                        <li class="pricing-item"><i class="fas fa-check"></i> Всё из Базового</li>
-                        <li class="pricing-item"><i class="fas fa-check"></i> Влажная уборка</li>
-                        <li class="pricing-item"><i class="fas fa-check"></i> Мойка сантехники</li>
-                        <li class="pricing-item"><i class="fas fa-check"></i> Чистка кухни</li>
-                        <li class="pricing-item"><i class="fas fa-check"></i> Мойка окон (до 4 шт)</li>
-                        <li class="pricing-item disabled"><i class="fas fa-times"></i> Химчистка мебели</li>
-                    </ul>
-                    <button class="btn btn-primary btn-block" onclick="scrollToSection('contact')">Выбрать тариф</button>
                 </div>
-                
-                <div class="pricing-card">
-                    <div class="pricing-header">
-                        <h3 class="pricing-title">Премиум</h3>
-                        <div class="pricing-price-wrapper">
-                            <span class="pricing-currency">от</span>
-                            <span class="pricing-value">10 000</span>
-                            <span class="pricing-period">₽ / уборка</span>
+                <div class="review-card fade-in">
+                    <div class="review-card__stars">★★★★★</div>
+                    <p class="review-card__text">«Заказывали химчистку дивана и ковров, а также мытьё панорамных окон. Диван выглядит как новенький, пропали все запахи от собаки. Окна прозрачные, разводов не осталось. Будем рекомендовать вас всем знакомым!»</p>
+                    <div class="review-card__author">
+                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&h=80&fit=crop&crop=face" alt="Анна" class="review-card__avatar">
+                        <div>
+                            <div class="review-card__name">Анна и Сергей</div>
+                            <div class="review-card__role">Загородный дом, 180 кв.м.</div>
                         </div>
-                    </div>
-                    <ul class="pricing-list">
-                        <li class="pricing-item"><i class="fas fa-check"></i> Всё из Стандарта</li>
-                        <li class="pricing-item"><i class="fas fa-check"></i> Генеральная уборка</li>
-                        <li class="pricing-item"><i class="fas fa-check"></i> Химчистка мебели</li>
-                        <li class="pricing-item"><i class="fas fa-check"></i> Мойка всех окон</li>
-                        <li class="pricing-item"><i class="fas fa-check"></i> Дезинфекция</li>
-                        <li class="pricing-item"><i class="fas fa-check"></i> Приоритетное обслуживание</li>
-                    </ul>
-                    <button class="btn btn-outline btn-block" onclick="scrollToSection('contact')">Выбрать тариф</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Отзывы -->
-    <section class="reviews" id="reviews">
-        <div class="container">
-            <div class="section-header animate-on-scroll">
-                <h2 class="section-title">Отзывы клиентов</h2>
-                <p class="section-subtitle">Что говорят о нас наши клиенты</p>
-            </div>
-            
-            <div class="reviews-slider" id="reviewsSlider">
-                <div class="review-card animate-on-scroll">
-                    <div class="review-header">
-                        <img src="https://randomuser.me/api/portraits/women/1.jpg" alt="Анна К." class="review-avatar">
-                        <div class="review-info">
-                            <h4>Анна К.</h4>
-                            <div class="review-rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="review-text">"Заказывала генеральную уборку после ремонта. Ребята справились отлично! Все чисто, аккуратно, очень довольна результатом. Рекомендую!"</p>
-                </div>
-                
-                <div class="review-card animate-on-scroll">
-                    <div class="review-header">
-                        <img src="https://randomuser.me/api/portraits/men/2.jpg" alt="Михаил П." class="review-avatar">
-                        <div class="review-info">
-                            <h4>Михаил П.</h4>
-                            <div class="review-rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="review-text">"Пользуюсь услугами CleanPro уже год для уборки офиса. Всегда вовремя, качественно, персонал вежливый. Отличная компания!"</p>
-                </div>
-                
-                <div class="review-card animate-on-scroll">
-                    <div class="review-header">
-                        <img src="https://randomuser.me/api/portraits/women/3.jpg" alt="Елена В." class="review-avatar">
-                        <div class="review-info">
-                            <h4>Елена В.</h4>
-                            <div class="review-rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="review-text">"Заказывала химчистку дивана. Результат превзошел ожидания - все пятна удалены, запах свежести. Спасибо за отличную работу!"</p>
-                </div>
-            </div>
-            
-            <div class="slider-controls">
-                <button class="slider-btn prev" id="prevBtn" aria-label="Предыдущий отзыв">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-                <button class="slider-btn next" id="nextBtn" aria-label="Следующий отзыв">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ -->
-    <section class="faq" id="faq">
-        <div class="container">
-            <div class="section-header animate-on-scroll">
-                <h2 class="section-title">Частые вопросы</h2>
-                <p class="section-subtitle">Ответы на популярные вопросы</p>
-            </div>
-            
-            <div class="faq-container">
-                <div class="faq-item animate-on-scroll">
-                    <button class="faq-question">
-                        <span>Как заказать уборку?</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Вы можете заказать уборку через форму на сайте, по телефону или в мессенджерах. Наш менеджер свяжется с вами в течение 15 минут для уточнения деталей.</p>
-                    </div>
-                </div>
-                
-                <div class="faq-item animate-on-scroll">
-                    <button class="faq-question">
-                        <span>Сколько стоит уборка?</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Стоимость зависит от типа уборки, площади помещения и дополнительных услуг. Минимальная стоимость - от 2 500 ₽. Точную цену рассчитает менеджер после уточнения деталей.</p>
-                    </div>
-                </div>
-                
-                <div class="faq-item animate-on-scroll">
-                    <button class="faq-question">
-                        <span>Предоставляете ли вы моющие средства?</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Да, мы используем профессиональные сертифицированные средства. По желанию клиента можем использовать ваши средства или гипоаллергенную продукцию.</p>
-                    </div>
-                </div>
-                
-                <div class="faq-item animate-on-scroll">
-                    <button class="faq-question">
-                        <span>Какие гарантии вы даете?</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Мы гарантируем качество уборки. Если вас что-то не устроит, мы бесплатно устраним недочеты в течение 24 часов. Все сотрудники застрахованы.</p>
-                    </div>
-                </div>
-                
-                <div class="faq-item animate-on-scroll">
-                    <button class="faq-question">
-                        <span>Можно ли присутствовать во время уборки?</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Конечно! Вы можете находиться дома во время уборки или оставить ключи нашему менеджеру под расписку. Мы уважаем вашу приватность и гарантируем сохранность имущества.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Контакты -->
-    <section class="contact" id="contact">
+    <!-- ===== CTA ===== -->
+    <section class="cta section" id="cta">
         <div class="container">
-            <div class="contact-content">
-                <div class="contact-info animate-on-scroll">
-                    <h2 class="section-title">Свяжитесь с нами</h2>
-                    <p>Оставьте заявку и мы перезвоним вам в течение 15 минут</p>
-                    
-                    <div class="contact-details">
-                        <div class="contact-item">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>г. Москва, ул. Примерная, д. 10, оф. 25</span>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-phone-alt"></i>
-                            <a href="tel:+79991234567">+7 (999) 123-45-67</a>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-envelope"></i>
-                            <a href="mailto:info@cleanpro.ru">info@cleanpro.ru</a>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-clock"></i>
-                            <span>Пн-Вс: 9:00 - 21:00</span>
-                        </div>
-                    </div>
-                    
-                    <div class="social-links">
-                        <a href="#" class="social-link" aria-label="WhatsApp">
-                            <i class="fab fa-whatsapp"></i>
-                        </a>
-                        <a href="#" class="social-link" aria-label="Telegram">
-                            <i class="fab fa-telegram-plane"></i>
-                        </a>
-                        <a href="#" class="social-link" aria-label="VKontakte">
-                            <i class="fab fa-vk"></i>
-                        </a>
-                        <a href="#" class="social-link" aria-label="Instagram">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                    </div>
+            <div class="cta__inner">
+                <div class="cta__content">
+                    <h2 class="cta__title">Запишитесь на уборку и получите скидку 10%</h2>
+                    <p class="cta__text">Акция действует на первый заказ генеральной или поддерживающей уборки при оформлении заявки онлайн.</p>
+                    <p class="cta__phone">+7 (900) 367-38-15</p>
+                    <p class="cta__schedule">Работаем ежедневно с 08:00 до 22:00 без выходных</p>
                 </div>
-                
-                <div class="contact-form-wrapper animate-on-scroll">
-                    <form class="contact-form" id="contactForm">
-                        <h3>Заказать обратный звонок</h3>
-                        
-                        <div class="form-group">
-                            <label for="name">Ваше имя *</label>
-                            <input type="text" id="name" name="name" placeholder="Иван Иванов" required>
-                            <span class="error-message" id="nameError"></span>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="phone">Телефон *</label>
-                            <input type="tel" id="phone" name="phone" placeholder="+7 (___) ___-__-__" required>
-                            <span class="error-message" id="phoneError"></span>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" placeholder="example@mail.ru">
-                            <span class="error-message" id="emailError"></span>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="service">Тип услуги</label>
-                            <select id="service" name="service">
-                                <option value="">Выберите услугу</option>
-                                <option value="apartment">Уборка квартиры</option>
-                                <option value="office">Уборка офиса</option>
-                                <option value="general">Генеральная уборка</option>
-                                <option value="drycleaning">Химчистка мебели</option>
-                                <option value="other">Другое</option>
-                            </select>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="message">Комментарий</label>
-                            <textarea id="message" name="message" rows="4" placeholder="Дополнительная информация..."></textarea>
-                        </div>
-                        
-                        <div class="form-checkbox">
-                            <input type="checkbox" id="agreement" name="agreement" required>
-                            <label for="agreement">Я согласен на обработку персональных данных *</label>
-                            <span class="error-message" id="agreementError"></span>
-                        </div>
-                        
-                        <button type="submit" class="btn btn-primary btn-full">
-                            <i class="fas fa-paper-plane"></i> Отправить заявку
-                        </button>
-                    </form>
-                </div>
+                <form class="cta__form" id="orderForm">
+                    <h3 class="cta__form-title">Оставить быструю заявку</h3>
+                    <div class="cta__form-group">
+                        <label class="cta__form-label">Ваше имя</label>
+                        <input type="text" class="cta__form-input" placeholder="Например, Александр" required>
+                    </div>
+                    <div class="cta__form-group">
+                        <label class="cta__form-label">Номер телефона</label>
+                        <input type="tel" class="cta__form-input" placeholder="+7 (___) ___-__-__" required>
+                    </div>
+                    <div class="cta__form-group">
+                        <label class="cta__form-label">Комментарий (необязательно)</label>
+                        <textarea class="cta__form-textarea" placeholder="Какая площадь, вид уборки, пожелания..."></textarea>
+                    </div>
+                    <button type="submit" class="cta__form-btn">Оформить заказ на скидку</button>
+                    <p class="cta__form-note">Нажимая кнопку, вы соглашаетесь с условиями обработки персональных данных.</p>
+                </form>
             </div>
         </div>
     </section>
 
-    <!-- Футер -->
-    <footer class="footer">
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer" id="contacts">
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <a href="#" class="logo">
-                        <i class="fas fa-sparkles"></i>
-                        <span>CleanPro</span>
-                    </a>
-                    <p>Профессиональные клининговые услуги для вашего дома и бизнеса.</p>
+            <div class="footer__inner">
+                <div class="footer__column">
+                    <div class="footer__logo">
+                        <span class="footer__logo-icon">✦</span>
+                        Уютная Уборка
+                    </div>
+                    <p class="footer__description">Профессиональная клининговая компания в Москве и области. Забота о чистоте вашего дома.</p>
+                    <div class="footer__socials">
+                        <a href="#" class="footer__social-link" aria-label="VK">VK</a>
+                        <a href="#" class="footer__social-link" aria-label="Telegram">TG</a>
+                        <a href="#" class="footer__social-link" aria-label="WhatsApp">WA</a>
+                    </div>
                 </div>
-                
-                <div class="footer-column">
-                    <h4>Услуги</h4>
-                    <ul>
-                        <li><a href="#services">Уборка квартир</a></li>
-                        <li><a href="#services">Уборка офисов</a></li>
-                        <li><a href="#services">Генеральная уборка</a></li>
-                        <li><a href="#services">Химчистка мебели</a></li>
-                    </ul>
+                <div class="footer__column">
+                    <h4 class="footer__column-title">Клининг</h4>
+                    <a href="#services" class="footer__link" data-scroll="#services">Генеральная уборка</a>
+                    <a href="#services" class="footer__link" data-scroll="#services">Уборка после ремонта</a>
+                    <a href="#services" class="footer__link" data-scroll="#services">Мойка окон</a>
+                    <a href="#services" class="footer__link" data-scroll="#services">Химчистка мебели</a>
+                    <a href="#services" class="footer__link" data-scroll="#services">Уборка офисов</a>
                 </div>
-                
-                <div class="footer-column">
-                    <h4>Компания</h4>
-                    <ul>
-                        <li><a href="#about">О нас</a></li>
-                        <li><a href="#pricing">Цены</a></li>
-                        <li><a href="#reviews">Отзывы</a></li>
-                        <li><a href="#contact">Контакты</a></li>
-                    </ul>
+                <div class="footer__column">
+                    <h4 class="footer__column-title">Компания</h4>
+                    <a href="#about" class="footer__link" data-scroll="#about">О нас</a>
+                    <a href="#portfolio" class="footer__link" data-scroll="#portfolio">Портфолио</a>
+                    <a href="#reviews" class="footer__link" data-scroll="#reviews">Отзывы клиентов</a>
+                    <a href="#" class="footer__link">Полезные статьи</a>
+                    <a href="#contacts" class="footer__link" data-scroll="#contacts">Контакты</a>
                 </div>
-                
-                <div class="footer-column">
-                    <h4>Контакты</h4>
-                    <ul>
-                        <li><i class="fas fa-phone-alt"></i> +7 (999) 123-45-67</li>
-                        <li><i class="fas fa-envelope"></i> info@cleanpro.ru</li>
-                        <li><i class="fas fa-map-marker-alt"></i> г. Москва, ул. Примерная, 10</li>
-                    </ul>
+                <div class="footer__column">
+                    <h4 class="footer__column-title">Контакты</h4>
+                    <div class="footer__contact-item">
+                        <span class="footer__contact-icon">📍</span>
+                        г. Москва, ул. Ленина, д. 25, офис 304
+                    </div>
+                    <div class="footer__contact-item">
+                        <span class="footer__contact-icon"></span>
+                        <a href="tel:+79003673815" class="footer__link" style="margin:0;">+7 (900) 367-38-15</a>
+                    </div>
+                    <div class="footer__contact-item">
+                        <span class="footer__contact-icon">✉️</span>
+                        <a href="mailto:info@mail.ru" class="footer__link" style="margin:0;">info@mail.ru</a>
+                    </div>
                 </div>
             </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; 2024 CleanPro. Все права защищены.</p>
-                <div class="footer-links">
-                    <a href="#">Политика конфиденциальности</a>
-                    <a href="#">Договор оферты</a>
+            <div class="footer__bottom">
+                <p class="footer__copyright">© 2025 Уютная уборка. Все права защищены.</p>
+                <div class="footer__bottom-links">
+                    <a href="#" class="footer__bottom-link">Политика конфиденциальности</a>
+                    <a href="#" class="footer__bottom-link">Пользовательское соглашение</a>
                 </div>
             </div>
         </div>
     </footer>
 
-    <!-- Кнопка наверх -->
-    <button class="scroll-to-top" id="scrollTopBtn" aria-label="Наверх">
-        <i class="fas fa-arrow-up"></i>
-    </button>
+    <!-- ===== SCROLL TO TOP ===== -->
+    <button class="scroll-top" id="scrollTop" aria-label="Наверх">↑</button>
 
-    <!-- Скрипты -->
+    <!-- Main Script -->
     <script src="script.js"></script>
 </body>
 </html>

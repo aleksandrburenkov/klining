@@ -1,290 +1,90 @@
 /**
- * CleanPro - JavaScript для лендинга клининговой компании
+ * ========================================
+   СКРИПТЫ - УЮТНАЯ УБОРКА
+   Функциональность лендинга
+   ========================================
  */
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function() {
     
-    // --- Мобильное меню (бургер) ---
-    const burgerBtn = document.getElementById('burgerBtn');
-    const nav = document.getElementById('nav');
-    const navLinks = document.querySelectorAll('.nav-link');
+    // ===== ПЛАВНАЯ ПРОКРУТКА К СЕКЦИЯМ =====
+    const scrollLinks = document.querySelectorAll('[data-scroll]');
     
-    if (burgerBtn) {
-        burgerBtn.addEventListener('click', () => {
-            nav.classList.toggle('active');
-            burgerBtn.classList.toggle('active');
-        });
-        
-        // Закрытие меню при клике на ссылку
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                nav.classList.remove('active');
-                burgerBtn.classList.remove('active');
-            });
-        });
-    }
-    
-    // --- Плавная прокрутка к якорям ---
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
+    scrollLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
             e.preventDefault();
-            const targetId = this.getAttribute('href');
-            if (targetId === '#') return;
+            const targetId = this.getAttribute('data-scroll');
+            const targetSection = document.querySelector(targetId);
             
-            const targetElement = document.querySelector(targetId);
-            if (targetElement) {
+            if (targetSection) {
                 const headerHeight = document.querySelector('.header').offsetHeight;
-                const targetPosition = targetElement.offsetTop - headerHeight;
+                const targetPosition = targetSection.offsetTop - headerHeight;
                 
                 window.scrollTo({
                     top: targetPosition,
                     behavior: 'smooth'
                 });
+                
+                // Закрыть мобильное меню если открыто
+                mobileMenu.classList.remove('active');
+                burger.classList.remove('active');
             }
         });
     });
     
-    // --- Подсветка активной секции в меню ---
-    const sections = document.querySelectorAll('section[id]');
+    // ===== МОБИЛЬНОЕ МЕНЮ (БУРГЕР) =====
+    const burger = document.getElementById('burger');
+    const mobileMenu = document.createElement('div');
+    mobileMenu.className = 'mobile-menu';
     
-    function highlightNavLink() {
-        const scrollY = window.pageYOffset;
-        const headerHeight = document.querySelector('.header').offsetHeight;
+    // Копируем ссылки из навигации в мобильное меню
+    const navLinks = document.querySelectorAll('.header__nav-link');
+    navLinks.forEach(link => {
+        const mobileLink = document.createElement('a');
+        mobileLink.href = link.href;
+        mobileLink.textContent = link.textContent;
+        mobileLink.setAttribute('data-scroll', link.getAttribute('data-scroll') || link.getAttribute('href'));
+        mobileMenu.appendChild(mobileLink);
+    });
+    
+    // Добавляем кнопку в мобильное меню
+    const mobileBtn = document.createElement('a');
+    mobileBtn.href = '#cta';
+    mobileBtn.textContent = 'Заказать звонок';
+    mobileBtn.setAttribute('data-scroll', '#cta');
+    mobileMenu.appendChild(mobileBtn);
+    
+    document.body.appendChild(mobileMenu);
+    
+    burger.addEventListener('click', function() {
+        this.classList.toggle('active');
+        mobileMenu.classList.toggle('active');
         
-        sections.forEach(section => {
-            const sectionHeight = section.offsetHeight;
-            const sectionTop = section.offsetTop - headerHeight - 100;
-            const sectionId = section.getAttribute('id');
-            const navLink = document.querySelector(`.nav-link[href="#${sectionId}"]`);
-            
-            if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-                navLinks.forEach(link => link.classList.remove('active'));
-                if (navLink) navLink.classList.add('active');
-            }
-        });
-    }
+        // Анимация линий бургера
+        const lines = this.querySelectorAll('.header__burger-line');
+        if (this.classList.contains('active')) {
+            lines[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+            lines[1].style.opacity = '0';
+            lines[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
+        } else {
+            lines[0].style.transform = 'none';
+            lines[1].style.opacity = '1';
+            lines[2].style.transform = 'none';
+        }
+    });
     
-    window.addEventListener('scroll', highlightNavLink);
-    
-    // --- Изменение шапки при скролле ---
+    // ===== ИЗМЕНЕНИЕ ШАПКИ ПРИ СКРОЛЛЕ =====
     const header = document.getElementById('header');
     
-    function handleHeaderScroll() {
+    window.addEventListener('scroll', function() {
         if (window.scrollY > 50) {
             header.classList.add('scrolled');
         } else {
             header.classList.remove('scrolled');
         }
-    }
-    
-    window.addEventListener('scroll', handleHeaderScroll);
-    
-    // --- Модальное окно ---
-    const modalOverlay = document.getElementById('modalOverlay');
-    const modalClose = document.getElementById('modalClose');
-    const openModalBtns = document.querySelectorAll('.open-modal');
-    
-    function openModal() {
-        modalOverlay.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    }
-    
-    function closeModal() {
-        modalOverlay.classList.remove('active');
-        document.body.style.overflow = '';
-    }
-    
-    openModalBtns.forEach(btn => {
-        btn.addEventListener('click', openModal);
     });
     
-    if (modalClose) {
-        modalClose.addEventListener('click', closeModal);
-    }
-    
-    if (modalOverlay) {
-        modalOverlay.addEventListener('click', (e) => {
-            if (e.target === modalOverlay) {
-                closeModal();
-            }
-        });
-    }
-    
-    // Закрытие по ESC
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
-            closeModal();
-        }
-    });
-    
-    // --- Маска для телефона ---
-    const phoneInputs = document.querySelectorAll('.phone-mask');
-    
-    phoneInputs.forEach(input => {
-        input.addEventListener('input', (e) => {
-            let value = e.target.value.replace(/\D/g, '');
-            
-            if (value.length > 11) value = value.slice(0, 11);
-            
-            if (value.length === 0) {
-                e.target.value = '';
-                return;
-            }
-            
-            if (value[0] === '8' || value[0] === '7') {
-                value = value.slice(1);
-            }
-            
-            let formattedValue = '+7';
-            if (value.length > 0) formattedValue += ' (' + value.slice(0, 3);
-            if (value.length > 3) formattedValue += ') ' + value.slice(3, 6);
-            if (value.length > 6) formattedValue += '-' + value.slice(6, 8);
-            if (value.length > 8) formattedValue += '-' + value.slice(8, 10);
-            
-            e.target.value = formattedValue;
-        });
-        
-        input.addEventListener('focus', () => {
-            if (!input.value) {
-                input.value = '+7 (';
-            }
-        });
-        
-        input.addEventListener('blur', () => {
-            if (input.value === '+7 ()' || input.value === '+7 (' || input.value === '') {
-                input.value = '';
-            }
-        });
-    });
-    
-    // --- Валидация форм ---
-    const forms = [
-        document.getElementById('calcForm'),
-        document.getElementById('ctaForm'),
-        document.getElementById('modalForm')
-    ];
-    
-    forms.forEach(form => {
-        if (!form) return;
-        
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            const inputs = form.querySelectorAll('input[required]');
-            let isValid = true;
-            
-            inputs.forEach(input => {
-                if (!input.value.trim()) {
-                    isValid = false;
-                    input.style.borderColor = '#e74c3c';
-                    
-                    setTimeout(() => {
-                        input.style.borderColor = '';
-                    }, 2000);
-                }
-            });
-            
-            // Проверка телефона
-            const phoneInput = form.querySelector('.phone-mask');
-            if (phoneInput) {
-                const phoneValue = phoneInput.value.replace(/\D/g, '');
-                if (phoneValue.length < 11) {
-                    isValid = false;
-                    phoneInput.style.borderColor = '#e74c3c';
-                    
-                    setTimeout(() => {
-                        phoneInput.style.borderColor = '';
-                    }, 2000);
-                }
-            }
-            
-            if (isValid) {
-                // Имитация отправки формы
-                const submitBtn = form.querySelector('button[type="submit"]');
-                const originalText = submitBtn.textContent;
-                submitBtn.textContent = 'Отправлено!';
-                submitBtn.disabled = true;
-                
-                setTimeout(() => {
-                    submitBtn.textContent = originalText;
-                    submitBtn.disabled = false;
-                    form.reset();
-                    closeModal();
-                    alert('Спасибо! Ваша заявка принята. Менеджер свяжется с вами в ближайшее время.');
-                }, 1500);
-            }
-        });
-    });
-    
-    // --- Слайдер отзывов ---
-    const slider = document.getElementById('reviewsSlider');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-    
-    if (slider && prevBtn && nextBtn) {
-        let isDragging = false;
-        let startX;
-        let scrollLeft;
-        
-        // Автопрокрутка
-        let autoScrollInterval = setInterval(() => {
-            const maxScroll = slider.scrollWidth - slider.clientWidth;
-            if (slider.scrollLeft >= maxScroll) {
-                slider.scrollTo({ left: 0, behavior: 'smooth' });
-            } else {
-                slider.scrollBy({ left: 420, behavior: 'smooth' });
-            }
-        }, 5000);
-        
-        // Остановка автопрокрутки при взаимодействии
-        slider.addEventListener('mouseenter', () => clearInterval(autoScrollInterval));
-        slider.addEventListener('mouseleave', () => {
-            autoScrollInterval = setInterval(() => {
-                const maxScroll = slider.scrollWidth - slider.clientWidth;
-                if (slider.scrollLeft >= maxScroll) {
-                    slider.scrollTo({ left: 0, behavior: 'smooth' });
-                } else {
-                    slider.scrollBy({ left: 420, behavior: 'smooth' });
-                }
-            }, 5000);
-        });
-        
-        prevBtn.addEventListener('click', () => {
-            slider.scrollBy({ left: -420, behavior: 'smooth' });
-        });
-        
-        nextBtn.addEventListener('click', () => {
-            slider.scrollBy({ left: 420, behavior: 'smooth' });
-        });
-        
-        // Drag для мыши
-        slider.addEventListener('mousedown', (e) => {
-            isDragging = true;
-            startX = e.pageX - slider.offsetLeft;
-            scrollLeft = slider.scrollLeft;
-            slider.style.cursor = 'grabbing';
-        });
-        
-        slider.addEventListener('mouseleave', () => {
-            isDragging = false;
-            slider.style.cursor = 'grab';
-        });
-        
-        slider.addEventListener('mouseup', () => {
-            isDragging = false;
-            slider.style.cursor = 'grab';
-        });
-        
-        slider.addEventListener('mousemove', (e) => {
-            if (!isDragging) return;
-            e.preventDefault();
-            const x = e.pageX - slider.offsetLeft;
-            const walk = (x - startX) * 2;
-            slider.scrollLeft = scrollLeft - walk;
-        });
-    }
-    
-    // --- Анимация появления элементов при скролле ---
+    // ===== АНИМАЦИИ ПОЯВЛЕНИЯ ЭЛЕМЕНТОВ ПРИ СКРОЛЛЕ =====
     const fadeElements = document.querySelectorAll('.fade-in');
     
     const observerOptions = {
@@ -292,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
         rootMargin: '0px 0px -50px 0px'
     };
     
-    const observer = new IntersectionObserver((entries) => {
+    const observer = new IntersectionObserver(function(entries) {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
@@ -303,6 +103,287 @@ document.addEventListener('DOMContentLoaded', () => {
     
     fadeElements.forEach(el => observer.observe(el));
     
-    // --- Активная навигация при загрузке ---
-    highlightNavLink();
+    // ===== КНОПКА НАВЕРХ =====
+    const scrollTopBtn = document.getElementById('scrollTop');
+    
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 500) {
+            scrollTopBtn.classList.add('visible');
+        } else {
+            scrollTopBtn.classList.remove('visible');
+        }
+    });
+    
+    scrollTopBtn.addEventListener('click', function() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+    
+    // ===== ВАЛИДАЦИЯ ФОРМЫ =====
+    const orderForm = document.getElementById('orderForm');
+    
+    if (orderForm) {
+        orderForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const nameInput = this.querySelector('input[type="text"]');
+            const phoneInput = this.querySelector('input[type="tel"]');
+            const commentInput = this.querySelector('textarea');
+            
+            let isValid = true;
+            
+            // Валидация имени
+            if (nameInput.value.trim().length < 2) {
+                showError(nameInput, 'Введите корректное имя (минимум 2 символа)');
+                isValid = false;
+            } else {
+                clearError(nameInput);
+            }
+            
+            // Валидация телефона
+            const phoneRegex = /^(\+7|7|8)?[\s\-]?\(?[489][0-9]{2}\)?[\s\-]?[0-9]{3}[\s\-]?[0-9]{2}[\s\-]?[0-9]{2}$/;
+            const cleanPhone = phoneInput.value.replace(/[\s\-\(\)]/g, '');
+            
+            if (!phoneRegex.test(phoneInput.value) || cleanPhone.length < 11) {
+                showError(phoneInput, 'Введите корректный номер телефона');
+                isValid = false;
+            } else {
+                clearError(phoneInput);
+            }
+            
+            if (isValid) {
+                // Имитация отправки формы
+                const submitBtn = this.querySelector('button[type="submit"]');
+                const originalText = submitBtn.textContent;
+                submitBtn.textContent = 'Отправка...';
+                submitBtn.disabled = true;
+                
+                setTimeout(() => {
+                    alert('Спасибо за заявку! Наш менеджер свяжется с вами в ближайшее время.');
+                    orderForm.reset();
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                }, 1500);
+            }
+        });
+        
+        // Функция показа ошибки
+        function showError(input, message) {
+            input.style.borderColor = '#FF6B6B';
+            input.style.backgroundColor = 'rgba(255, 107, 107, 0.1)';
+            
+            let error = input.parentElement.querySelector('.error-message');
+            if (!error) {
+                error = document.createElement('span');
+                error.className = 'error-message';
+                error.style.cssText = 'color: #FF6B6B; font-size: 12px; margin-top: 4px; display: block;';
+                input.parentElement.appendChild(error);
+            }
+            error.textContent = message;
+        }
+        
+        // Функция очистки ошибки
+        function clearError(input) {
+            input.style.borderColor = '#E5E7EB';
+            input.style.backgroundColor = '';
+            
+            const error = input.parentElement.querySelector('.error-message');
+            if (error) {
+                error.remove();
+            }
+        }
+        
+        // Очистка ошибок при вводе
+        const formInputs = orderForm.querySelectorAll('input, textarea');
+        formInputs.forEach(input => {
+            input.addEventListener('input', function() {
+                clearError(this);
+            });
+        });
+    }
+    
+    // ===== МАСКА ДЛЯ ТЕЛЕФОНА =====
+    const phoneInputs = document.querySelectorAll('input[type="tel"]');
+    
+    phoneInputs.forEach(input => {
+        input.addEventListener('focus', function() {
+            if (this.value === '') {
+                this.value = '+7 (';
+            }
+        });
+        
+        input.addEventListener('input', function(e) {
+            let value = this.value.replace(/\D/g, '');
+            
+            if (value.length > 11) {
+                value = value.substring(0, 11);
+            }
+            
+            if (value.length > 0) {
+                if (value[0] === '7' || value[0] === '8') {
+                    value = '7' + value.substring(1);
+                } else {
+                    value = '7' + value;
+                }
+            }
+            
+            let formattedValue = '+7 (';
+            if (value.length > 1) {
+                formattedValue += value.substring(1, 4);
+            }
+            if (value.length >= 4) {
+                formattedValue += ') ' + value.substring(4, 7);
+            }
+            if (value.length >= 7) {
+                formattedValue += '-' + value.substring(7, 9);
+            }
+            if (value.length >= 9) {
+                formattedValue += '-' + value.substring(9, 11);
+            }
+            
+            this.value = formattedValue;
+        });
+        
+        input.addEventListener('blur', function() {
+            if (this.value === '+7 ()') {
+                this.value = '';
+            }
+        });
+    });
+    
+    // ===== АККОРДЕОН (ЕСЛИ ЕСТЬ) =====
+    const accordionItems = document.querySelectorAll('.accordion-item');
+    
+    accordionItems.forEach(item => {
+        const header = item.querySelector('.accordion-header');
+        
+        header.addEventListener('click', function() {
+            const isActive = item.classList.contains('active');
+            
+            // Закрываем все остальные
+            accordionItems.forEach(i => i.classList.remove('active'));
+            
+            // Если не было активно, открываем текущее
+            if (!isActive) {
+                item.classList.add('active');
+            }
+        });
+    });
+    
+    // ===== ПАРАЛЛАКС ЭФФЕКТ ДЛЯ HERO =====
+    const heroImage = document.querySelector('.hero__image');
+    
+    if (heroImage) {
+        window.addEventListener('scroll', function() {
+            const scrolled = window.scrollY;
+            const heroSection = document.querySelector('.hero');
+            
+            if (scrolled < heroSection.offsetHeight) {
+                heroImage.style.transform = `translateY(${scrolled * 0.3}px)`;
+            }
+        });
+    }
+    
+    // ===== СЧЕТЧИК ЦИФР (ДЛЯ ABOUT STATS) =====
+    const statNumbers = document.querySelectorAll('.about__stat-number');
+    
+    const statsObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const target = entry.target;
+                const text = target.textContent;
+                const hasPlus = text.includes('+');
+                const hasK = text.includes('к');
+                const number = parseInt(text.replace(/\D/g, ''));
+                
+                if (!isNaN(number)) {
+                    animateCounter(target, 0, number, 2000, hasPlus, hasK);
+                    statsObserver.unobserve(target);
+                }
+            }
+        });
+    }, { threshold: 0.5 });
+    
+    statNumbers.forEach(stat => statsObserver.observe(stat));
+    
+    function animateCounter(element, start, end, duration, hasPlus, hasK) {
+        const startTime = performance.now();
+        
+        function update(currentTime) {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            
+            // Easing функция
+            const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+            
+            const current = Math.floor(start + (end - start) * easeOutQuart);
+            
+            let displayValue = current.toString();
+            if (hasK) displayValue += 'к';
+            if (hasPlus) displayValue += '+';
+            
+            element.textContent = displayValue;
+            
+            if (progress < 1) {
+                requestAnimationFrame(update);
+            } else {
+                // Финальное значение
+                let finalValue = end.toString();
+                if (hasK) finalValue += 'к';
+                if (hasPlus) finalValue += '+';
+                element.textContent = finalValue;
+            }
+        }
+        
+        requestAnimationFrame(update);
+    }
+    
+    // ===== ЛЕНИВАЯ ЗАГРУЗКА ИЗОБРАЖЕНИЙ =====
+    const lazyImages = document.querySelectorAll('img[data-src]');
+    
+    const imageObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                img.src = img.dataset.src;
+                img.removeAttribute('data-src');
+                imageObserver.unobserve(img);
+            }
+        });
+    });
+    
+    lazyImages.forEach(img => imageObserver.observe(img));
+    
+    // ===== КОНСОЛЬ ДЛЯ ОТЛАДКИ =====
+    console.log('%c Уютная Уборка ', 'background: #2E8B57; color: white; font-size: 16px; padding: 10px; border-radius: 5px;');
+    console.log('Лендинг успешно загружен! 🎉');
 });
+
+// ===== ДОПОЛНИТЕЛЬНЫЕ УТИЛИТЫ =====
+
+// Debounce функция для оптимизации событий
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+// Throttle функция для ограничения частоты вызовов
+function throttle(func, limit) {
+    let inThrottle;
+    return function(...args) {
+        if (!inThrottle) {
+            func.apply(this, args);
+            inThrottle = true;
+            setTimeout(() => inThrottle = false, limit);
+        }
+    };
+}
