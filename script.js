@@ -34,11 +34,12 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // ===== МОБИЛЬНОЕ МЕНЮ (БУРГЕР) =====
     const burger = document.getElementById('burger');
-    const navMobile = document.getElementById('navMobile');
+    const navDesktop = document.getElementById('navDesktop');
     
     burger.addEventListener('click', function() {
         this.classList.toggle('active');
-        navMobile.classList.toggle('active');
+        navDesktop.classList.toggle('active-mobile');
+        navDesktop.classList.toggle('show');
         
         // Блокируем скролл страницы при открытом меню
         document.body.classList.toggle('menu-open');
@@ -57,10 +58,10 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // Закрываем меню при клике на ссылку
-    const mobileLinks = navMobile.querySelectorAll('[data-close-menu]');
+    const mobileLinks = navDesktop.querySelectorAll('[data-close-menu]');
     mobileLinks.forEach(link => {
         link.addEventListener('click', function() {
-            navMobile.classList.remove('active');
+            navDesktop.classList.remove('active-mobile', 'show');
             burger.classList.remove('active');
             document.body.classList.remove('menu-open');
             

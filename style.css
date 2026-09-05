@@ -183,9 +183,12 @@ body {
 .header__nav {
     display: flex;
     gap: 32px;
+    align-items: center;
 }
 
-.header__nav-link {
+.header__nav-link,
+.header__nav .header__phone,
+.header__nav .header__btn {
     font-family: var(--font-inter);
     font-size: 15px;
     font-weight: 500;
@@ -1168,8 +1171,8 @@ body.menu-open {
         display: flex;
     }
     
-    /* Мобильное меню на полный экран */
-    .header__nav--mobile {
+    /* Мобильное меню на полный экран - используем основной nav */
+    .header__nav.active-mobile {
         position: fixed;
         top: 0;
         left: 0;
@@ -1187,28 +1190,38 @@ body.menu-open {
         transition: all 0.3s ease;
     }
     
-    .header__nav--mobile.active {
+    .header__nav.active-mobile.show {
         opacity: 1;
         visibility: visible;
     }
     
-    .header__nav--mobile .header__nav-link {
+    .header__nav.active-mobile .header__nav-link {
         font-size: 24px;
         font-weight: 600;
         color: var(--color-gray-900);
         text-align: center;
     }
     
-    .header__phone {
+    .header__phone.desktop-only,
+    .header__btn.desktop-only {
+        display: none;
+    }
+    
+    .header__nav.active-mobile .header__phone,
+    .header__nav.active-mobile .header__btn {
         display: block;
         font-size: 20px;
         margin: 0;
     }
     
-    .header__btn {
-        display: block;
+    .header__nav.active-mobile .header__btn {
         padding: 14px 32px;
         font-size: 16px;
+    }
+    
+    /* Запрет скролла при открытом меню */
+    body.menu-open {
+        overflow: hidden;
     }
     
     .hero {
