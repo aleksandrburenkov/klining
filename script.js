@@ -34,44 +34,45 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // ===== МОБИЛЬНОЕ МЕНЮ (БУРГЕР) =====
     const burger = document.getElementById('burger');
-    const mobileMenu = document.createElement('div');
-    mobileMenu.className = 'mobile-menu';
+    const mobileMenu = document.getElementById('navMobile');
     
-    // Копируем ссылки из навигации в мобильное меню
-    const navLinks = document.querySelectorAll('.header__nav-link');
-    navLinks.forEach(link => {
-        const mobileLink = document.createElement('a');
-        mobileLink.href = link.href;
-        mobileLink.textContent = link.textContent;
-        mobileLink.setAttribute('data-scroll', link.getAttribute('data-scroll') || link.getAttribute('href'));
-        mobileMenu.appendChild(mobileLink);
-    });
-    
-    // Добавляем кнопку в мобильное меню
-    const mobileBtn = document.createElement('a');
-    mobileBtn.href = '#cta';
-    mobileBtn.textContent = 'Заказать звонок';
-    mobileBtn.setAttribute('data-scroll', '#cta');
-    mobileMenu.appendChild(mobileBtn);
-    
-    document.body.appendChild(mobileMenu);
-    
-    burger.addEventListener('click', function() {
-        this.classList.toggle('active');
-        mobileMenu.classList.toggle('active');
+    if (burger && mobileMenu) {
+        burger.addEventListener('click', function() {
+            this.classList.toggle('active');
+            mobileMenu.classList.toggle('header__nav-mobile--active');
+            
+            // Запрет/разрешение скролла страницы
+            document.body.classList.toggle('menu-open');
+            
+            // Анимация линий бургера
+            const lines = this.querySelectorAll('.header__burger-line');
+            if (this.classList.contains('active')) {
+                lines[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+                lines[1].style.opacity = '0';
+                lines[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
+            } else {
+                lines[0].style.transform = 'none';
+                lines[1].style.opacity = '1';
+                lines[2].style.transform = 'none';
+            }
+        });
         
-        // Анимация линий бургера
-        const lines = this.querySelectorAll('.header__burger-line');
-        if (this.classList.contains('active')) {
-            lines[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
-            lines[1].style.opacity = '0';
-            lines[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
-        } else {
-            lines[0].style.transform = 'none';
-            lines[1].style.opacity = '1';
-            lines[2].style.transform = 'none';
-        }
-    });
+        // Закрытие меню при клике на ссылки
+        const closeMenuElements = document.querySelectorAll('[data-close-menu]');
+        closeMenuElements.forEach(element => {
+            element.addEventListener('click', function() {
+                burger.classList.remove('active');
+                mobileMenu.classList.remove('header__nav-mobile--active');
+                document.body.classList.remove('menu-open');
+                
+                // Сброс анимации бургера
+                const lines = burger.querySelectorAll('.header__burger-line');
+                lines[0].style.transform = 'none';
+                lines[1].style.opacity = '1';
+                lines[2].style.transform = 'none';
+            });
+        });
+    }
     
     // ===== ИЗМЕНЕНИЕ ШАПКИ ПРИ СКРОЛЛЕ =====
     const header = document.getElementById('header');
