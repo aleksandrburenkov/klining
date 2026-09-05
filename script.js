@@ -34,16 +34,11 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // ===== МОБИЛЬНОЕ МЕНЮ (БУРГЕР) =====
     const burger = document.getElementById('burger');
-    const mobileMenu = document.getElementById('mobileMenu');
-    
-    // Добавляем класс для мобильного меню
-    if (mobileMenu) {
-        mobileMenu.classList.add('mobile-menu');
-    }
+    const navMobile = document.getElementById('navMobile');
     
     burger.addEventListener('click', function() {
         this.classList.toggle('active');
-        mobileMenu.classList.toggle('active');
+        navMobile.classList.toggle('active');
         
         // Блокируем скролл страницы при открытом меню
         document.body.classList.toggle('menu-open');
@@ -62,10 +57,10 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // Закрываем меню при клике на ссылку
-    const mobileLinks = mobileMenu.querySelectorAll('.header__nav-link');
+    const mobileLinks = navMobile.querySelectorAll('[data-close-menu]');
     mobileLinks.forEach(link => {
         link.addEventListener('click', function() {
-            mobileMenu.classList.remove('active');
+            navMobile.classList.remove('active');
             burger.classList.remove('active');
             document.body.classList.remove('menu-open');
             
